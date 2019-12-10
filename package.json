@@ -1,0 +1,70 @@
+{
+  "name": "@pnp/action-cli-login",
+  "version": "1.0.0",
+  "description": "GitHub Action to Login to a tenant using Office 365 CLI",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "ncc build src\\main.ts"
+  },
+  "author": "Tatti, Anoop <anoop@live.co.uk>",
+  "maintainers": [
+    {
+      "name": "Waldek Mastykarz",
+      "email": "waldek@mastykarz.nl",
+      "web": "https://blog.mastykarz.nl"
+    },
+    {
+      "name": "Velin Georgiev",
+      "email": "velin.georgiev@gmail.com",
+      "web": "https://blog.velingeorgiev.com"
+    },
+    {
+      "name": "Garry Trinder",
+      "email": "garry.trinder@live.com",
+      "web": "https://garrytrinder.github.io/"
+    }
+  ],
+  "contributors": [
+    "Georgiev, Velin <velin.georgiev@gmail.com>",
+    "Mastykarz, Waldek <waldek@mastykarz.nl>",
+    "Tatti, Anoop <anoop@live.co.uk>",
+    "Trinder, Garry <garry.trinder@live.com>"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pnp/action-cli-login.git"
+  },
+  "homepage": "https://pnp.github.io/action-cli-login/",
+  "bugs": {
+    "url": "https://github.com/pnp/action-cli-login/issues"
+  },
+  "keywords": [
+    "GitHub action",
+    "office 365",
+    "sharepoint framework",
+    "o365",
+    "spfx",
+    "sharepoint online",
+    "sharepoint",
+    "microsoft teams",
+    "microsoft graph",
+    "microsoft flow",
+    "azure active directory",
+    "azure ad",
+    "azure",
+    "microsoft"
+  ],
+  "dependencies": {
+    "@actions/core": "^1.2.1",
+    "@actions/exec": "^1.0.3",
+    "@actions/io": "^1.0.2"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.21.0",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.4",
+    "@types/node": "^13.1.6"
+  }
+}
