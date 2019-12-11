@@ -22,7 +22,7 @@ Since this action requires user name and password which are sensitive pieces of 
 These secrets are encrypted and can only be used by GitHub actions. 
 
 ### Example workflow - Office 365 CLI Login
-On every `push` build the code and the login to Office 365 before deploying.
+On every `push` build the code and then login to Office 365 before deploying.
 
 ```yaml
 name: SPFx CICD with O365 CLI
