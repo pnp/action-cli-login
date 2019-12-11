@@ -10,8 +10,6 @@ This GitHub Action (created using Docker container) uses [Office 365 CLI](https:
 Create a workflow `.yml` file in your `.github/workflows` directory. An [example workflow](#example-workflow---office-365-cli-login) is available below. For more information, reference the GitHub Help Documentation for [Creating a workflow file](https://help.github.com/en/articles/configuring-a-workflow#creating-a-workflow-file).
 
 ### Inputs
-For more information on these inputs, see the [API Documentation](https://developer.github.com/v3/repos/releases/#input)
-
 - `ADMIN_USERNAME` : **Required** Username (email address of the admin)
 - `ADMIN_PASSWORD` : **Required** Password of the admin
 
