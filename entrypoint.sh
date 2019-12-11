@@ -13,7 +13,7 @@ if [[ -z "$ADMIN_PASSWORD" ]]; then
 fi
 
 main() {
-    echo "Logging into tenant using Office 365 CLI..."
+    echo "Attempting to login into the tenant using Office 365 CLI..."
     o365 login --authType password --userName $ADMIN_USERNAME --password $ADMIN_PASSWORD
     o365 status  
     echo "Logged in."
