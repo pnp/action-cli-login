@@ -2,13 +2,15 @@
   "name": "action-cli-login",
   "version": "1.0.0",
   "description": "GitHub Action to Login to a tenant using Office 365 CLI",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "ncc build src\\main.ts"
   },
   "author": "Anoop Tatti",
   "license": "ISC",
   "devDependencies": {
+    "@zeit/ncc": "^0.21.0",
     "tslint": "^5.20.1",
     "typescript": "^3.7.4"
   },
