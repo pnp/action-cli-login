@@ -1,0 +1,21 @@
+{
+  "name": "action-cli-login",
+  "version": "1.0.0",
+  "description": "GitHub Action to Login to a tenant using Office 365 CLI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anoop Tatti",
+  "license": "ISC",
+  "devDependencies": {
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.4"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.1",
+    "@actions/exec": "^1.0.3",
+    "@actions/io": "^1.0.2",
+    "@types/node": "^13.1.6"
+  }
+}

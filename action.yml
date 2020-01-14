@@ -8,8 +8,8 @@ inputs:
     description: 'Password of the admin'
     required: true
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "node12"
+  main: "dist/index.js"
 branding:
   icon: 'log-in'  
   color: 'blue'

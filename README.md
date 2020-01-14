@@ -1,9 +1,9 @@
-# action-cli-login
+# Office 365 CLI Login
 GitHub action to login to a tenant using Office 365 CLI.
 
 ![Office 365 CLI Login](./images/cli-login.png)
 
-This GitHub Action (created using Docker container) uses [Office 365 CLI](https://pnp.github.io/office365-cli/), specifically the [login command](https://pnp.github.io/office365-cli/cmd/login), to allow you log in to Office 365.
+This GitHub Action (created using typescript) uses [Office 365 CLI](https://pnp.github.io/office365-cli/), specifically the [login command](https://pnp.github.io/office365-cli/cmd/login), to allow you log in to Office 365.
 
 ## Usage
 ### Pre-requisites
@@ -49,7 +49,7 @@ jobs:
     # Office 365 cli login action
     - name: Login to tenant
       uses: pnp/action-cli-login@v1
-      env:
+      with:
         ADMIN_USERNAME:  ${{ secrets.adminUsername }}
         ADMIN_PASSWORD:  ${{ secrets.adminPassword }}
     
