@@ -1,11 +1,10 @@
 {
   "name": "@pnp/action-cli-login",
-  "version": "1.0.0",
-  "description": "GitHub Action to Login to a tenant using Office 365 CLI",
+  "version": "2.0.0",
+  "description": "GitHub Action to Login to a tenant using CLI for Microsoft 365",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "ncc build src\\main.ts"
+    "build": "ncc build src/main.ts"
   },
   "author": "Tatti, Anoop <anoop@live.co.uk>",
   "maintainers": [
@@ -23,6 +22,16 @@
       "name": "Garry Trinder",
       "email": "garry.trinder@live.com",
       "web": "https://garrytrinder.github.io/"
+    },
+    {
+      "name": "Albert-Jan Schot",
+      "email": "appie@digiwijs.nl",
+      "web": "https://www.cloudappie.nl/"
+    },
+    {
+      "name": "Rabia Williams",
+      "email": "rabiawilliams@gmail.com",
+      "web": "https://rabiawilliams.com/"
     }
   ],
   "contributors": [
@@ -41,10 +50,11 @@
     "url": "https://github.com/pnp/action-cli-login/issues"
   },
   "keywords": [
-    "GitHub action",
     "office 365",
+    "microsoft 365",
     "sharepoint framework",
     "o365",
+    "m365",
     "spfx",
     "sharepoint online",
     "sharepoint",

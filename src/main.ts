@@ -2,31 +2,31 @@ import * as core from '@actions/core';
 import { exec } from '@actions/exec';
 import { which } from '@actions/io';
 
-let o365CLIPath: string;
+let cliMicrosoft365Path: string;
 
 async function main() {
     try {
         const username: string = core.getInput("ADMIN_USERNAME", { required: true });
         const password: string = core.getInput("ADMIN_PASSWORD", { required: true });
 
-        core.info("ℹ️ Installing Office 365 CLI...");
+        core.info("ℹ️ Installing CLI for Microsoft 365...");
 
-        const o365CLIInstallCommand: string = "npm install -g @pnp/office365-cli";
+        const cliMicrosoft365InstallCommand: string = "npm install -g @pnp/cli-microsoft365";
         const options: any = {};
         options.silent = true;
         if (process.env.RUNNER_OS == "Windows") {
-            await exec(o365CLIInstallCommand, [], options);
+            await exec(cliMicrosoft365InstallCommand, [], options);
         } else {
-            await exec(`sudo ${o365CLIInstallCommand}`, [], options);
+            await exec(`sudo ${cliMicrosoft365InstallCommand}`, [], options);
         }
-        o365CLIPath = await which("o365", true);
+        cliMicrosoft365Path = await which("m365", true);
 
-        core.info("✅ Completed installing Office 365 CLI.");
+        core.info("✅ Completed installing CLI for Microsoft 365.");
 
         core.info("ℹ️ Logging in to the tenant...");
 
-        await executeO365CLICommand(`login --authType password --userName ${username} --password ${password}`);
-        await executeO365CLICommand("status");
+        await executeCLIMicrosoft365Command(`login --authType password --userName ${username} --password ${password}`);
+        await executeCLIMicrosoft365Command("status");
 
         core.info("✅ Login successful.");
 
@@ -36,9 +36,9 @@ async function main() {
     }
 }
 
-async function executeO365CLICommand(command: string) {
+async function executeCLIMicrosoft365Command(command: string) {
     try {
-        await exec(`"${o365CLIPath}" ${command}`, [], {});
+        await exec(`"${cliMicrosoft365Path}" ${command}`, [], {});
     }
     catch (err) {
         throw new Error(err);
