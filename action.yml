@@ -1,5 +1,5 @@
-name: 'Office 365 CLI Login'
-description: 'Login to tenant using Office 365 CLI'
+name: 'CLI for Microsoft 365 Login'
+description: 'Login to tenant using CLI for Microsoft 365'
 inputs:
   ADMIN_USERNAME:  
     description: 'Username (email address) of the admin'

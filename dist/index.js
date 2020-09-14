@@ -973,27 +973,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
 const exec_1 = __webpack_require__(986);
 const io_1 = __webpack_require__(1);
-let o365CLIPath;
+let cliMicrosoft365Path;
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const username = core.getInput("ADMIN_USERNAME", { required: true });
             const password = core.getInput("ADMIN_PASSWORD", { required: true });
-            core.info("ℹ️ Installing Office 365 CLI...");
-            const o365CLIInstallCommand = "npm install -g @pnp/office365-cli";
+            core.info("ℹ️ Installing CLI for Microsoft 365...");
+            const cliMicrosoft365InstallCommand = "npm install -g @pnp/cli-microsoft365";
             const options = {};
             options.silent = true;
             if (process.env.RUNNER_OS == "Windows") {
-                yield exec_1.exec(o365CLIInstallCommand, [], options);
+                yield exec_1.exec(cliMicrosoft365InstallCommand, [], options);
             }
             else {
-                yield exec_1.exec(`sudo ${o365CLIInstallCommand}`, [], options);
+                yield exec_1.exec(`sudo ${cliMicrosoft365InstallCommand}`, [], options);
             }
-            o365CLIPath = yield io_1.which("o365", true);
-            core.info("✅ Completed installing Office 365 CLI.");
+            cliMicrosoft365Path = yield io_1.which("m365", true);
+            core.info("✅ Completed installing CLI for Microsoft 365.");
             core.info("ℹ️ Logging in to the tenant...");
-            yield executeO365CLICommand(`login --authType password --userName ${username} --password ${password}`);
-            yield executeO365CLICommand("status");
+            yield executeCLIMicrosoft365Command(`login --authType password --userName ${username} --password ${password}`);
+            yield executeCLIMicrosoft365Command("status");
             core.info("✅ Login successful.");
         }
         catch (err) {
@@ -1002,10 +1002,10 @@ function main() {
         }
     });
 }
-function executeO365CLICommand(command) {
+function executeCLIMicrosoft365Command(command) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield exec_1.exec(`"${o365CLIPath}" ${command}`, [], {});
+            yield exec_1.exec(`"${cliMicrosoft365Path}" ${command}`, [], {});
         }
         catch (err) {
             throw new Error(err);

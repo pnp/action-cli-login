@@ -1,13 +1,13 @@
-# Office 365 CLI login GitHub action
-GitHub action to login to a tenant using Office 365 CLI.
+# CLI for Microsoft 365 Login
+GitHub action to login to a tenant using CLI for Microsoft 365.
 
-![Office 365 CLI Login](./images/cli-login.png)
+![CLI for Microsoft 365](./images/pnp-cli-microsoft365-blue.svg)
 
-This GitHub Action (created using typescript) uses [Office 365 CLI](https://pnp.github.io/office365-cli/), specifically the [login command](https://pnp.github.io/office365-cli/cmd/login), to allow you log in to Office 365.
+This GitHub Action (created using typescript) uses [CLI for Microsoft 365](https://pnp.github.io/cli-microsoft365/), specifically the [login command](https://pnp.github.io/cli-microsoft365/cmd/login), to allow you log in to Microsoft 365.
 
 ## Usage
 ### Pre-requisites
-Create a workflow `.yml` file in your `.github/workflows` directory. An [example workflow](#example-workflow---office-365-cli-login) is available below. For more information, reference the GitHub Help Documentation for [Creating a workflow file](https://help.github.com/en/articles/configuring-a-workflow#creating-a-workflow-file).
+Create a workflow `.yml` file in your `.github/workflows` directory. An [example workflow](#example-workflow---cli-for-microsoft-365-login) is available below. For more information, reference the GitHub Help Documentation for [Creating a workflow file](https://help.github.com/en/articles/configuring-a-workflow#creating-a-workflow-file).
 
 ### Inputs
 - `ADMIN_USERNAME` : **Required** Username (email address of the admin)
@@ -19,11 +19,11 @@ Since this action requires user name and password which are sensitive pieces of 
 - `adminPassword` - store the password of that user in this.
 These secrets are encrypted and can only be used by GitHub actions. 
 
-### Example workflow - Office 365 CLI Login
+### Example workflow - CLI for Microsoft 365 Login
 On every `push` build the code and then login to Office 365 before deploying.
 
 ```yaml
-name: SPFx CICD with O365 CLI
+name: SPFx CICD with Cli for Microsoft 365
 
 on: [push]
 
@@ -46,9 +46,9 @@ jobs:
     ## Code to get the package omitted
     ##
 
-    # Office 365 cli login action
+    # CLI for Microsoft 365 login action
     - name: Login to tenant
-      uses: pnp/action-cli-login@v1.0.0
+      uses: pnp/action-cli-login@v2.0.0
       with:
         ADMIN_USERNAME:  ${{ secrets.adminUsername }}
         ADMIN_PASSWORD:  ${{ secrets.adminPassword }}
@@ -62,6 +62,9 @@ jobs:
 If self-hosted runners are used for running the workflow, then please make sure that they have `PowerShell` or `bash` installed on them. 
 
 ## Release notes
+
+### v2.0.0
+- Renames action to 'CLI for Microsoft 365'
 
 ### v1.0.0
 - Added inital 'Office 365 CLI login' GitHub action solving #2
