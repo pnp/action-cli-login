@@ -1,6 +1,6 @@
 {
   "name": "@pnp/action-cli-login",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "GitHub Action to Login to a tenant using CLI for Microsoft 365",
   "license": "MIT",
   "main": "lib/main.js",
@@ -76,6 +76,7 @@
   ],
   "contributors": [
     "Georgiev, Velin <velin.georgiev@gmail.com>",
+    "Maillot, Michaël <battosaimykle@gmail.com>",
     "Mastykarz, Waldek <waldek@mastykarz.nl>",
     "Tatti, Anoop <anoop@live.co.uk>",
     "Trinder, Garry <garry.trinder@live.com>"

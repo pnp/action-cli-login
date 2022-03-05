@@ -10,7 +10,11 @@ async function run(): Promise<void> {
 
     const options: Options = getOptions([
         constants.ACTION_ADMIN_USERNAME,
-        constants.ACTION_ADMIN_PASSWORD
+        constants.ACTION_ADMIN_PASSWORD,
+        constants.ACTION_CERTIFICATE_ENCODED,
+        constants.ACTION_CERTIFICATE_PASSWORD,
+        constants.ACTION_APP_ID,
+        constants.ACTION_TENANT
     ]);
 
     try {
@@ -23,7 +27,7 @@ async function run(): Promise<void> {
 
         core.info('ℹ️ Attempting to log in...');
         const loginCommand = getLoginCommand(options);
-        await exec(`${constants.CLI_PREFIX} ${loginCommand}`, [], { silent: true });
+        await exec(`${constants.CLI_PREFIX} ${loginCommand}`, [], { });
         await exec(`${constants.CLI_PREFIX} status`, [], { silent: false });
         core.info('✅ Login successful');
     }

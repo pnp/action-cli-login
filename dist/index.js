@@ -10,15 +10,35 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getLoginCommand = void 0;
 const utils_1 = __nccwpck_require__(918);
 function getLoginCommand(options) {
-    if ((0, utils_1.isNullOrEmpty)(options.ADMIN_USERNAME)) {
-        throw new Error('ADMIN_USERNAME is required');
+    let authCommand;
+    if (options.ADMIN_USERNAME || options.ADMIN_PASSWORD) {
+        if ((0, utils_1.isNullOrEmpty)(options.ADMIN_USERNAME)) {
+            throw new Error('ADMIN_USERNAME is required');
+        }
+        ;
+        if ((0, utils_1.isNullOrEmpty)(options.ADMIN_PASSWORD)) {
+            throw new Error('ADMIN_PASSWORD is required');
+        }
+        ;
+        authCommand = `login --authType password --userName ${options.ADMIN_USERNAME} --password ${options.ADMIN_PASSWORD}`;
     }
-    ;
-    if ((0, utils_1.isNullOrEmpty)(options.ADMIN_PASSWORD)) {
-        throw new Error('ADMIN_PASSWORD is required');
+    else {
+        if ((0, utils_1.isNullOrEmpty)(options.CERTIFICATE_ENCODED)) {
+            throw new Error('CERTIFICATE_ENCODED is required if ADMIN_USERNAME and ADMIN_PASSWORD are not provided');
+        }
+        ;
+        authCommand = `login --authType certificate --certificateBase64Encoded ${options.CERTIFICATE_ENCODED}`;
+        if (options.CERTIFICATE_PASSWORD) {
+            authCommand += ` --password ${options.CERTIFICATE_PASSWORD}`;
+        }
     }
-    ;
-    return `login --authType password --userName ${options.ADMIN_USERNAME} --password ${options.ADMIN_PASSWORD}`;
+    if (options.APP_ID) {
+        authCommand += ` --appId ${options.APP_ID}`;
+    }
+    if (options.TENANT) {
+        authCommand += ` --tenant ${options.TENANT}`;
+    }
+    return authCommand;
 }
 exports.getLoginCommand = getLoginCommand;
 //# sourceMappingURL=commands.js.map
@@ -37,6 +57,10 @@ exports.constants = {
     CLI_PREFIX: 'm365',
     ACTION_ADMIN_USERNAME: 'ADMIN_USERNAME',
     ACTION_ADMIN_PASSWORD: 'ADMIN_PASSWORD',
+    ACTION_CERTIFICATE_ENCODED: 'CERTIFICATE_ENCODED',
+    ACTION_CERTIFICATE_PASSWORD: 'CERTIFICATE_PASSWORD',
+    ACTION_APP_ID: 'APP_ID',
+    ACTION_TENANT: 'TENANT',
 };
 //# sourceMappingURL=constants.js.map
 
@@ -68,7 +92,11 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         const options = (0, utils_1.getOptions)([
             constants_1.constants.ACTION_ADMIN_USERNAME,
-            constants_1.constants.ACTION_ADMIN_PASSWORD
+            constants_1.constants.ACTION_ADMIN_PASSWORD,
+            constants_1.constants.ACTION_CERTIFICATE_ENCODED,
+            constants_1.constants.ACTION_CERTIFICATE_PASSWORD,
+            constants_1.constants.ACTION_APP_ID,
+            constants_1.constants.ACTION_TENANT
         ]);
         try {
             (0, validate_1.validate)(options);
@@ -78,7 +106,7 @@ function run() {
             core.info(`✅ CLI for Microsoft 365 successfully installed at ${cliPath}`);
             core.info('ℹ️ Attempting to log in...');
             const loginCommand = (0, commands_1.getLoginCommand)(options);
-            yield (0, exec_1.exec)(`${constants_1.constants.CLI_PREFIX} ${loginCommand}`, [], { silent: true });
+            yield (0, exec_1.exec)(`${constants_1.constants.CLI_PREFIX} ${loginCommand}`, [], {});
             yield (0, exec_1.exec)(`${constants_1.constants.CLI_PREFIX} status`, [], { silent: false });
             core.info('✅ Login successful');
         }
@@ -132,14 +160,17 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.validate = void 0;
 const utils_1 = __nccwpck_require__(918);
 function validate(options) {
-    if ((0, utils_1.isNullOrEmpty)(options.ADMIN_USERNAME) && (0, utils_1.isNullOrEmpty)(options.ADMIN_PASSWORD)) {
-        throw new Error('ADMIN_USERNAME and ADMIN_PASSWORD are required');
+    if ((0, utils_1.isNullOrEmpty)(options.ADMIN_USERNAME) && (0, utils_1.isNullOrEmpty)(options.ADMIN_PASSWORD)
+        && (0, utils_1.isNullOrEmpty)(options.CERTIFICATE_ENCODED)) {
+        throw new Error('You must provide either ADMIN_USERNAME and ADMIN_PASSWORD parameters (if authenticating with user name / password), or at least CERTIFICATE_ENCODED (if authenticating with a certificate). More information here: https://pnp.github.io/cli-microsoft365/cmd/login/');
     }
-    if ((0, utils_1.isNullOrEmpty)(options.ADMIN_USERNAME)) {
-        throw new Error('ADMIN_USERNAME is required');
-    }
-    if ((0, utils_1.isNullOrEmpty)(options.ADMIN_PASSWORD)) {
-        throw new Error('ADMIN_PASSWORD is required');
+    else {
+        if ((0, utils_1.isNullOrEmpty)(options.ADMIN_USERNAME) && !(0, utils_1.isNullOrEmpty)(options.ADMIN_PASSWORD)) {
+            throw new Error('ADMIN_USERNAME is required if ADMIN_PASSWORD is passed');
+        }
+        if (!(0, utils_1.isNullOrEmpty)(options.ADMIN_USERNAME) && (0, utils_1.isNullOrEmpty)(options.ADMIN_PASSWORD)) {
+            throw new Error('ADMIN_PASSWORD is required if ADMIN_USERNAME is passed');
+        }
     }
 }
 exports.validate = validate;
