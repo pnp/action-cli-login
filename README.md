@@ -130,7 +130,6 @@ If self-hosted runners are used for running the workflow, then please make sure 
 ## Release notes
 
 ### v2.1.0
-
 - Adds the certificate login options
 
 ### v2.0.0
