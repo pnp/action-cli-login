@@ -27,7 +27,7 @@ async function run(): Promise<void> {
 
         core.info('ℹ️ Attempting to log in...');
         const loginCommand = getLoginCommand(options);
-        await exec(`${constants.CLI_PREFIX} ${loginCommand}`, [], { silent: true });
+        await exec(`${constants.CLI_PREFIX} ${loginCommand}`, [], { });
         await exec(`${constants.CLI_PREFIX} status`, [], { silent: false });
         core.info('✅ Login successful');
     }
