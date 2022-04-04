@@ -1,0 +1,15 @@
+on: [workflow_dispatch]
+
+jobs:
+  cli_login_job:
+    runs-on: ubuntu-latest
+    name: CLI Login Job
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: CLI for Microsoft 365 Login
+        uses: ./
+        id: login
+        with:
+          ADMIN_USERNAME: ${{secrets.ADMIN_USERNAME}}
+          ADMIN_PASSWORD: ${{secrets.ADMIN_PASSWORD}}

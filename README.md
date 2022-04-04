@@ -15,12 +15,12 @@ Create a workflow `.yml` file in your `.github/workflows` directory. An [example
 
 #### Optional requirement
 Since this action requires user name and password which are sensitive pieces of information, it would be ideal to store them securely. We can achieve this in a GitHub repo by using [secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets). So, click on `settings` tab in your repo and add 2 new secrets:
-- `adminUsername` - store the admin user name in this (e.g. user@contoso.onmicrosoft.com)
-- `adminPassword` - store the password of that user in this.
+- `ADMIN_USERNAME` - store the admin user name in this (e.g. user@contoso.onmicrosoft.com)
+- `ADMIN_PASSWORD` - store the password of that user in this.
 These secrets are encrypted and can only be used by GitHub actions. 
 
 ### Example workflow - CLI for Microsoft 365 Login
-On every `push` build the code and then login to Office 365 before deploying.
+On every `push` build the code and then login to Microsoft 365 before deploying.
 
 ```yaml
 name: SPFx CICD with Cli for Microsoft 365
@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.x]
+        node-version: [16.x]
     
     steps:
     
@@ -50,8 +50,8 @@ jobs:
     - name: Login to tenant
       uses: pnp/action-cli-login@v2.0.0
       with:
-        ADMIN_USERNAME:  ${{ secrets.adminUsername }}
-        ADMIN_PASSWORD:  ${{ secrets.adminPassword }}
+        ADMIN_USERNAME:  ${{ secrets.ADMIN_USERNAME }}
+        ADMIN_PASSWORD:  ${{ secrets.ADMIN_PASSWORD }}
     
     ##
     ## Code to deploy the package to tenant omitted

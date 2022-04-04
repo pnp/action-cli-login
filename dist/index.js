@@ -1,5 +1,152 @@
-/******/ (() => { // webpackBootstrap
+require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
+
+/***/ 496:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getLoginCommand = void 0;
+const utils_1 = __nccwpck_require__(918);
+function getLoginCommand(options) {
+    if ((0, utils_1.isNullOrEmpty)(options.ADMIN_USERNAME)) {
+        throw new Error('ADMIN_USERNAME is required');
+    }
+    ;
+    if ((0, utils_1.isNullOrEmpty)(options.ADMIN_PASSWORD)) {
+        throw new Error('ADMIN_PASSWORD is required');
+    }
+    ;
+    return `login --authType password --userName ${options.ADMIN_USERNAME} --password ${options.ADMIN_PASSWORD}`;
+}
+exports.getLoginCommand = getLoginCommand;
+//# sourceMappingURL=commands.js.map
+
+/***/ }),
+
+/***/ 105:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.constants = void 0;
+exports.constants = {
+    CLI_NPMINSTALL_COMMAND: 'npm i -g @pnp/cli-microsoft365',
+    CLI_PREFIX: 'm365',
+    ACTION_ADMIN_USERNAME: 'ADMIN_USERNAME',
+    ACTION_ADMIN_PASSWORD: 'ADMIN_PASSWORD',
+};
+//# sourceMappingURL=constants.js.map
+
+/***/ }),
+
+/***/ 109:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const core = __nccwpck_require__(186);
+const exec_1 = __nccwpck_require__(514);
+const io_1 = __nccwpck_require__(436);
+const commands_1 = __nccwpck_require__(496);
+const constants_1 = __nccwpck_require__(105);
+const utils_1 = __nccwpck_require__(918);
+const validate_1 = __nccwpck_require__(997);
+function run() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const options = (0, utils_1.getOptions)([
+            constants_1.constants.ACTION_ADMIN_USERNAME,
+            constants_1.constants.ACTION_ADMIN_PASSWORD
+        ]);
+        try {
+            (0, validate_1.validate)(options);
+            core.info('ℹ️ Installing CLI for Microsoft 365...');
+            yield (0, exec_1.exec)(constants_1.constants.CLI_NPMINSTALL_COMMAND, [], { silent: true });
+            const cliPath = yield (0, io_1.which)(constants_1.constants.CLI_PREFIX, true);
+            core.info(`✅ CLI for Microsoft 365 successfully installed at ${cliPath}`);
+            core.info('ℹ️ Attempting to log in...');
+            const loginCommand = (0, commands_1.getLoginCommand)(options);
+            yield (0, exec_1.exec)(`${constants_1.constants.CLI_PREFIX} ${loginCommand}`, [], { silent: true });
+            yield (0, exec_1.exec)(`${constants_1.constants.CLI_PREFIX} status`, [], { silent: false });
+            core.info('✅ Login successful');
+        }
+        catch (err) {
+            const error = err;
+            core.error(`🚨 ${error.message}`);
+            core.setFailed(error);
+        }
+    });
+}
+run();
+//# sourceMappingURL=main.js.map
+
+/***/ }),
+
+/***/ 918:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getOptions = exports.isNullOrEmpty = void 0;
+const core = __nccwpck_require__(186);
+function isNullOrEmpty(string) {
+    return !string;
+}
+exports.isNullOrEmpty = isNullOrEmpty;
+function getOptions(optionsList) {
+    if (optionsList.length === 0) {
+        throw new Error('Option names are required');
+    }
+    ;
+    const options = Object.create(null);
+    optionsList.forEach(element => {
+        options[element] = core.getInput(element, { trimWhitespace: true });
+    });
+    return options;
+}
+exports.getOptions = getOptions;
+;
+//# sourceMappingURL=utils.js.map
+
+/***/ }),
+
+/***/ 997:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.validate = void 0;
+const utils_1 = __nccwpck_require__(918);
+function validate(options) {
+    if ((0, utils_1.isNullOrEmpty)(options.ADMIN_USERNAME) && (0, utils_1.isNullOrEmpty)(options.ADMIN_PASSWORD)) {
+        throw new Error('ADMIN_USERNAME and ADMIN_PASSWORD are required');
+    }
+    if ((0, utils_1.isNullOrEmpty)(options.ADMIN_USERNAME)) {
+        throw new Error('ADMIN_USERNAME is required');
+    }
+    if ((0, utils_1.isNullOrEmpty)(options.ADMIN_PASSWORD)) {
+        throw new Error('ADMIN_PASSWORD is required');
+    }
+}
+exports.validate = validate;
+;
+//# sourceMappingURL=validate.js.map
+
+/***/ }),
 
 /***/ 351:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
@@ -2822,87 +2969,6 @@ exports.debug = debug; // for test
 
 /***/ }),
 
-/***/ 399:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core = __importStar(__nccwpck_require__(186));
-const exec_1 = __nccwpck_require__(514);
-const io_1 = __nccwpck_require__(436);
-let cliMicrosoft365Path;
-function main() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const username = core.getInput("ADMIN_USERNAME", { required: true });
-            const password = core.getInput("ADMIN_PASSWORD", { required: true });
-            core.info("ℹ️ Installing CLI for Microsoft 365...");
-            const cliMicrosoft365InstallCommand = "npm install -g @pnp/cli-microsoft365";
-            const options = {};
-            options.silent = true;
-            if (process.env.RUNNER_OS == "Windows") {
-                yield (0, exec_1.exec)(cliMicrosoft365InstallCommand, [], options);
-            }
-            else {
-                yield (0, exec_1.exec)(`sudo ${cliMicrosoft365InstallCommand}`, [], options);
-            }
-            cliMicrosoft365Path = yield (0, io_1.which)("m365", true);
-            core.info("✅ Completed installing CLI for Microsoft 365.");
-            core.info("ℹ️ Logging in to the tenant...");
-            yield executeCLIMicrosoft365Command(`login --authType password --userName ${username} --password ${password}`);
-            yield executeCLIMicrosoft365Command("status");
-            core.info("✅ Login successful.");
-        }
-        catch (err) {
-            core.error("🚨 Login to the tenant failed. Please check the credentials. For more information refer https://aka.ms/create-secrets-for-GitHub-workflows");
-            core.setFailed(err);
-        }
-    });
-}
-function executeCLIMicrosoft365Command(command) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            yield (0, exec_1.exec)(`"${cliMicrosoft365Path}" ${command}`, [], {});
-        }
-        catch (err) {
-            throw new Error(err);
-        }
-    });
-}
-main();
-
-
-/***/ }),
-
 /***/ 357:
 /***/ ((module) => {
 
@@ -3049,8 +3115,9 @@ module.exports = require("util");
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __nccwpck_require__(399);
+/******/ 	var __webpack_exports__ = __nccwpck_require__(109);
 /******/ 	module.exports = __webpack_exports__;
 /******/ 	
 /******/ })()
 ;
+//# sourceMappingURL=index.js.map
