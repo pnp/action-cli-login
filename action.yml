@@ -1,15 +1,15 @@
-name: 'CLI for Microsoft 365 Login'
-description: 'Login to tenant using CLI for Microsoft 365'
+name: "CLI for Microsoft 365 Login"
+description: "Login to tenant using CLI for Microsoft 365"
 inputs:
-  ADMIN_USERNAME:  
-    description: 'Username (email address) of the admin'
+  ADMIN_USERNAME:
+    description: "Username (upn) of the admin"
     required: true
-  ADMIN_PASSWORD:  
-    description: 'Password of the admin'
+  ADMIN_PASSWORD:
+    description: "Password of the admin"
     required: true
 runs:
-  using: "node12"
+  using: "node16"
   main: "dist/index.js"
 branding:
-  icon: 'log-in'  
-  color: 'blue'
+  icon: "log-in"
+  color: "blue"

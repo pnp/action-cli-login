@@ -1,12 +1,42 @@
 {
   "name": "@pnp/action-cli-login",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "GitHub Action to Login to a tenant using CLI for Microsoft 365",
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "ncc build src/main.ts"
+  "license": "MIT",
+  "main": "lib/main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pnp/action-cli-login.git"
   },
-  "author": "Tatti, Anoop <anoop@live.co.uk>",
+  "homepage": "https://pnp.github.io/action-cli-login/",
+  "bugs": {
+    "url": "https://github.com/pnp/action-cli-login/issues"
+  },
+  "scripts": {
+    "test": "mocha \"lib/**/*.spec.js\"",
+    "test:cov": "c8 npm run test",
+    "build": "tsc -p .",
+    "watch": "tsc -w -p .",
+    "package": "ncc build --source-map"
+  },
+  "keywords": [
+    "office 365",
+    "microsoft 365",
+    "sharepoint framework",
+    "o365",
+    "m365",
+    "spfx",
+    "sharepoint online",
+    "sharepoint",
+    "microsoft teams",
+    "microsoft graph",
+    "microsoft flow",
+    "azure active directory",
+    "azure ad",
+    "azure",
+    "microsoft"
+  ],
+  "author": "https://github.com/pnp/action-cli-login/graphs/contributors",
   "maintainers": [
     {
       "name": "Waldek Mastykarz",
@@ -32,6 +62,16 @@
       "name": "Rabia Williams",
       "email": "rabiawilliams@gmail.com",
       "web": "https://rabiawilliams.com/"
+    },
+    {
+      "name": "Patrick Lamber",
+      "email": "patrick@nubo.eu",
+      "web": "https://www.nubo.eu/"
+    },
+    {
+      "name": "Arjun Menon",
+      "email": "arjun.umenon@gmail.com",
+      "web": "https://arjunumenon.com/"
     }
   ],
   "contributors": [
@@ -40,40 +80,17 @@
     "Tatti, Anoop <anoop@live.co.uk>",
     "Trinder, Garry <garry.trinder@live.com>"
   ],
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pnp/action-cli-login.git"
-  },
-  "homepage": "https://pnp.github.io/action-cli-login/",
-  "bugs": {
-    "url": "https://github.com/pnp/action-cli-login/issues"
-  },
-  "keywords": [
-    "office 365",
-    "microsoft 365",
-    "sharepoint framework",
-    "o365",
-    "m365",
-    "spfx",
-    "sharepoint online",
-    "sharepoint",
-    "microsoft teams",
-    "microsoft graph",
-    "microsoft flow",
-    "azure active directory",
-    "azure ad",
-    "azure",
-    "microsoft"
-  ],
   "dependencies": {
     "@actions/core": "^1.6.0",
     "@actions/exec": "^1.1.0",
     "@actions/io": "^1.1.1"
   },
   "devDependencies": {
+    "@types/mocha": "^9.1.0",
     "@types/node": "^16.11.6",
     "@vercel/ncc": "^0.31.1",
+    "c8": "^7.11.0",
+    "mocha": "^9.2.2",
     "typescript": "^4.4.4"
   }
 }
