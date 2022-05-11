@@ -10,7 +10,11 @@ async function run(): Promise<void> {
 
     const options: Options = getOptions([
         constants.ACTION_ADMIN_USERNAME,
-        constants.ACTION_ADMIN_PASSWORD
+        constants.ACTION_ADMIN_PASSWORD,
+        constants.ACTION_CERTIFICATE_ENCODED,
+        constants.ACTION_CERTIFICATE_PASSWORD,
+        constants.ACTION_AAD_APP_ID,
+        constants.ACTION_TENANT_ID
     ]);
 
     try {

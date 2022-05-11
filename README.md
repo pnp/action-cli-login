@@ -32,13 +32,13 @@ All inputs are optional. But depending of the authentication type chosen, follow
 Since this action requires sensitive information such as user name, password and encoded certificate for example, it would be ideal to store them securely. We can achieve this in a GitHub repo by using [secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets). So, click on `settings` tab in your repo and add:
 
 - 2 new secrets if `authType` is `password`:
-  - `adminUsername` - store the admin user name in this (e.g. user@contoso.onmicrosoft.com)
-  - `adminPassword` - store the password of that user in this.
+  - `ADMIN_USERNAME` - store the admin user name in this (e.g. user@contoso.onmicrosoft.com)
+  - `ADMIN_PASSWORD` - store the password of that user in this.
 
 - 3 new secrets if `authType` is `certificate`:
-  - `appID` - store the Azure AD application ID used for authentication
-  - `appEncodedCertificate` - store the Base64-encoded string of the certificate stored in the Azure AD application
-  - `appPasswordCertificate` - store the certificate password
+  - `AAD_APP_ID` - store the Azure AD application ID used for authentication
+  - `CERTIFICATE_ENCODED` - store the Base64-encoded string of the certificate stored in the Azure AD application
+  - `CERTIFICATE_PASSWORD` - store the certificate password
   
 These secrets are encrypted and can only be used by GitHub actions. 
 
@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.x]
+        node-version: [16.x]
     
     steps:
     
@@ -74,8 +74,8 @@ jobs:
     - name: Login to tenant
       uses: pnp/action-cli-login@v2.1.0
       with:
-        ADMIN_USERNAME:  ${{ secrets.adminUsername }}
-        ADMIN_PASSWORD:  ${{ secrets.adminPassword }}
+        ADMIN_USERNAME:  ${{ secrets.ADMIN_USERNAME }}
+        ADMIN_PASSWORD:  ${{ secrets.ADMIN_PASSWORD }}
     
     ##
     ## Code to deploy the package to tenant omitted
@@ -102,7 +102,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.x]
+        node-version: [16.x]
     
     steps:
     
@@ -115,8 +115,8 @@ jobs:
       uses: pnp/action-cli-login@v2.1.0
       with:
         AAD_APP_ID:  ${{ secrets.appID }}
-        CERTIFICATE_ENCODED: ${{ secrets.appEncodedCertificate }}
-        CERTIFICATE_PASSWORD:  ${{ secrets.appPasswordCertificate }}
+        CERTIFICATE_ENCODED: ${{ secrets.CERTIFICATE_ENCODED }}
+        CERTIFICATE_PASSWORD:  ${{ secrets.CERTIFICATE_PASSWORD }}
     
     ##
     ## Code to deploy the package to tenant omitted
@@ -130,6 +130,7 @@ If self-hosted runners are used for running the workflow, then please make sure 
 ## Release notes
 
 ### v2.1.0
+
 - Adds the certificate login options
 
 ### v2.0.0

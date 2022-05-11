@@ -2,8 +2,31 @@ import { isNullOrEmpty } from './utils';
 import { Options } from './validate';
 
 export function getLoginCommand(options: Options): string {
-    if (isNullOrEmpty(options.ADMIN_USERNAME)) { throw new Error('ADMIN_USERNAME is required'); };
-    if (isNullOrEmpty(options.ADMIN_PASSWORD)) { throw new Error('ADMIN_PASSWORD is required'); };
+    let authCommand: string;
 
-    return `login --authType password --userName ${options.ADMIN_USERNAME} --password ${options.ADMIN_PASSWORD}`;
+    if (options.ADMIN_USERNAME || options.ADMIN_PASSWORD) {
+        if (isNullOrEmpty(options.ADMIN_USERNAME)) { throw new Error('ADMIN_USERNAME is required'); };
+        if (isNullOrEmpty(options.ADMIN_PASSWORD)) { throw new Error('ADMIN_PASSWORD is required'); };
+        
+        authCommand = `login --authType password --userName ${options.ADMIN_USERNAME} --password ${options.ADMIN_PASSWORD}`;
+    }
+    else {
+        if (isNullOrEmpty(options.CERTIFICATE_ENCODED)) { throw new Error('CERTIFICATE_ENCODED is required if ADMIN_USERNAME and ADMIN_PASSWORD are not provided'); };
+        
+        authCommand = `login --authType certificate --certificateBase64Encoded ${options.CERTIFICATE_ENCODED}`;
+        
+        if (options.CERTIFICATE_PASSWORD) {
+            authCommand += ` --password ${options.CERTIFICATE_PASSWORD}`;
+        }
+    }
+
+    if (options.AAD_APP_ID) {
+        authCommand += ` --appId ${options.AAD_APP_ID}`;
+    }
+
+    if (options.TENANT_ID) {
+        authCommand += ` --tenant ${options.TENANT_ID}`;
+    }
+
+    return authCommand;
 }
