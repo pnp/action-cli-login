@@ -20,12 +20,12 @@ export function getLoginCommand(options: Options): string {
         }
     }
 
-    if (options.AAD_APP_ID) {
-        authCommand += ` --appId ${options.AAD_APP_ID}`;
+    if (options.APP_ID) {
+        authCommand += ` --appId ${options.APP_ID}`;
     }
 
-    if (options.TENANT_ID) {
-        authCommand += ` --tenant ${options.TENANT_ID}`;
+    if (options.TENANT) {
+        authCommand += ` --tenant ${options.TENANT}`;
     }
 
     return authCommand;

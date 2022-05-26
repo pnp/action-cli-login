@@ -13,18 +13,18 @@ Create a workflow `.yml` file in your `.github/workflows` directory. An [example
 
 ### Inputs
 
-- `ADMIN_USERNAME` : Username (email address of the admin)
+- `ADMIN_USERNAME` : Username (upn) of the admin
 - `ADMIN_PASSWORD` : Password of the admin
 - `CERTIFICATE_ENCODED` : Base64-encoded string with certificate private key
 - `CERTIFICATE_PASSWORD` : Password for the certificate
-- `AAD_APP_ID` : App ID of the Azure AD application to use for certificate authentication
-- `TENANT_ID` : ID or domain (for example "contoso.onmicrosoft.com") of the tenant from which accounts should be able to authenticate
+- `APP_ID` : App ID of the Azure AD application to use for certificate authentication. If not specified, use the app specified in the 'CLIMICROSOFT365_AADAPPID' environment variable. If the environment variable is not defined, use the multitenant PnP Management Shell app
+- `TENANT` : ID of the tenant from which accounts should be able to authenticate. Use `common` or `organization` if the app is multitenant. If not specified, use the tenant specified in the `CLIMICROSOFT365_TENANT` environment variable. If the environment variable is not defined, use `common` as the tenant identifier
 
 All inputs are optional. But depending of the authentication type chosen, following pair of inputs will be necessary:
 
 - `authType` is `password`: `ADMIN_USERNAME` and `ADMIN_PASSWORD` are required
-- `authType` is `certificate`: at least `CERTIFICATE_ENCODED` and `AAD_APP_ID` are required
-  - `TENANT_ID` will be required. It can be the ID of the tenant from which accounts should be able to authenticate. Use `common` or `organization` if the app is multitenant
+- `authType` is `certificate`: at least `CERTIFICATE_ENCODED` and `APP_ID` are required
+  - `TENANT` will be required. ID of the tenant from which accounts should be able to authenticate. Use `common` or `organization` if the app is multitenant
   - Depending on the certificate provided, if encoded with password, `CERTIFICATE_PASSWORD` will be required
 
 #### Optional requirement
@@ -35,10 +35,13 @@ Since this action requires sensitive information such as user name, password and
   - `ADMIN_USERNAME` - store the admin user name in this (e.g. user@contoso.onmicrosoft.com)
   - `ADMIN_PASSWORD` - store the password of that user in this.
 
-- 3 new secrets if `authType` is `certificate`:
-  - `AAD_APP_ID` - store the Azure AD application ID used for authentication
+- 2 new secrets if `authType` is `certificate`:
   - `CERTIFICATE_ENCODED` - store the Base64-encoded string of the certificate stored in the Azure AD application
   - `CERTIFICATE_PASSWORD` - store the certificate password
+
+- 2 new secrets if using a custom Azure AD identity:
+  - `APP_ID` - store App ID of the Azure AD application to use for authentication
+  - `TENANT` - store the ID of the tenant from which accounts should be able to authenticate
   
 These secrets are encrypted and can only be used by GitHub actions. 
 
@@ -114,7 +117,7 @@ jobs:
     - name: Login to tenant
       uses: pnp/action-cli-login@v2.1.0
       with:
-        AAD_APP_ID:  ${{ secrets.appID }}
+        APP_ID:  ${{ secrets.APP_ID }}
         CERTIFICATE_ENCODED: ${{ secrets.CERTIFICATE_ENCODED }}
         CERTIFICATE_PASSWORD:  ${{ secrets.CERTIFICATE_PASSWORD }}
     

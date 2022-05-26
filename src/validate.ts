@@ -4,8 +4,8 @@ export interface Options {
     ADMIN_PASSWORD: string;
     CERTIFICATE_ENCODED: string;
     CERTIFICATE_PASSWORD: string;
-    AAD_APP_ID: string;
-    TENANT_ID: string;
+    APP_ID: string;
+    TENANT: string;
 }
 
 export function validate(options: Options): void | Error {

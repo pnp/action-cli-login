@@ -32,11 +32,11 @@ function getLoginCommand(options) {
             authCommand += ` --password ${options.CERTIFICATE_PASSWORD}`;
         }
     }
-    if (options.AAD_APP_ID) {
-        authCommand += ` --appId ${options.AAD_APP_ID}`;
+    if (options.APP_ID) {
+        authCommand += ` --appId ${options.APP_ID}`;
     }
-    if (options.TENANT_ID) {
-        authCommand += ` --tenant ${options.TENANT_ID}`;
+    if (options.TENANT) {
+        authCommand += ` --tenant ${options.TENANT}`;
     }
     return authCommand;
 }
@@ -59,8 +59,8 @@ exports.constants = {
     ACTION_ADMIN_PASSWORD: 'ADMIN_PASSWORD',
     ACTION_CERTIFICATE_ENCODED: 'CERTIFICATE_ENCODED',
     ACTION_CERTIFICATE_PASSWORD: 'CERTIFICATE_PASSWORD',
-    ACTION_AAD_APP_ID: 'AAD_APP_ID',
-    ACTION_TENANT_ID: 'TENANT_ID',
+    ACTION_APP_ID: 'APP_ID',
+    ACTION_TENANT: 'TENANT',
 };
 //# sourceMappingURL=constants.js.map
 
@@ -95,8 +95,8 @@ function run() {
             constants_1.constants.ACTION_ADMIN_PASSWORD,
             constants_1.constants.ACTION_CERTIFICATE_ENCODED,
             constants_1.constants.ACTION_CERTIFICATE_PASSWORD,
-            constants_1.constants.ACTION_AAD_APP_ID,
-            constants_1.constants.ACTION_TENANT_ID
+            constants_1.constants.ACTION_APP_ID,
+            constants_1.constants.ACTION_TENANT
         ]);
         try {
             (0, validate_1.validate)(options);

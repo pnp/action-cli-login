@@ -40,15 +40,15 @@ describe('utils', () => {
         });
 
         it('returns correct object', () => {
-            const optionsList: string[] = ['ADMIN_USERNAME', 'ADMIN_PASSWORD', 'CERTIFICATE_ENCODED', 'CERTIFICATE_PASSWORD', 'AAD_APP_ID', 'TENANT_ID'];
+            const optionsList: string[] = ['ADMIN_USERNAME', 'ADMIN_PASSWORD', 'CERTIFICATE_ENCODED', 'CERTIFICATE_PASSWORD', 'APP_ID', 'TENANT'];
             const actual: Options = getOptions(optionsList);
             const expected: Options = {
                 ADMIN_USERNAME: '',
                 ADMIN_PASSWORD: '',
                 CERTIFICATE_ENCODED: '',
                 CERTIFICATE_PASSWORD: '',
-                AAD_APP_ID: '',
-                TENANT_ID: ''
+                APP_ID: '',
+                TENANT: ''
 
             }
             assert.deepEqual(actual, expected);
