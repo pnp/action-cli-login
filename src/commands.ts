@@ -1,3 +1,4 @@
+import { constants } from './constants';
 import { isNullOrEmpty } from './utils';
 import { Options } from './validate';
 
@@ -29,4 +30,17 @@ export function getLoginCommand(options: Options): string {
     }
 
     return authCommand;
+}
+
+export function getInstallCommand(options: Options): string {
+    let installCommand: string;
+
+    if (options.CLI_VERSION) {        
+        installCommand = `${constants.CLI_NPMINSTALL_COMMAND}@${options.CLI_VERSION}`;
+    }
+    else {
+        installCommand = constants.CLI_NPMINSTALL_COMMAND;
+    }
+
+    return installCommand;
 }

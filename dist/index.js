@@ -7,7 +7,8 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getLoginCommand = void 0;
+exports.getInstallCommand = exports.getLoginCommand = void 0;
+const constants_1 = __nccwpck_require__(105);
 const utils_1 = __nccwpck_require__(918);
 function getLoginCommand(options) {
     let authCommand;
@@ -41,6 +42,17 @@ function getLoginCommand(options) {
     return authCommand;
 }
 exports.getLoginCommand = getLoginCommand;
+function getInstallCommand(options) {
+    let installCommand;
+    if (options.CLI_VERSION) {
+        installCommand = `${constants_1.constants.CLI_NPMINSTALL_COMMAND}@${options.CLI_VERSION}`;
+    }
+    else {
+        installCommand = constants_1.constants.CLI_NPMINSTALL_COMMAND;
+    }
+    return installCommand;
+}
+exports.getInstallCommand = getInstallCommand;
 //# sourceMappingURL=commands.js.map
 
 /***/ }),
@@ -61,6 +73,7 @@ exports.constants = {
     ACTION_CERTIFICATE_PASSWORD: 'CERTIFICATE_PASSWORD',
     ACTION_APP_ID: 'APP_ID',
     ACTION_TENANT: 'TENANT',
+    ACTION_CLI_VERSION: 'CLI_VERSION',
 };
 //# sourceMappingURL=constants.js.map
 
@@ -96,12 +109,19 @@ function run() {
             constants_1.constants.ACTION_CERTIFICATE_ENCODED,
             constants_1.constants.ACTION_CERTIFICATE_PASSWORD,
             constants_1.constants.ACTION_APP_ID,
-            constants_1.constants.ACTION_TENANT
+            constants_1.constants.ACTION_TENANT,
+            constants_1.constants.ACTION_CLI_VERSION
         ]);
         try {
             (0, validate_1.validate)(options);
-            core.info('ℹ️ Installing CLI for Microsoft 365...');
-            yield (0, exec_1.exec)(constants_1.constants.CLI_NPMINSTALL_COMMAND, [], { silent: true });
+            const installCommand = (0, commands_1.getInstallCommand)(options);
+            if (options.CLI_VERSION) {
+                core.info(`☑ Installing CLI for Microsoft 365 (version / tag [${options.CLI_VERSION}])...`);
+            }
+            else {
+                core.info('ℹ️ Installing CLI for Microsoft 365...');
+            }
+            yield (0, exec_1.exec)(`${installCommand}`, [], { silent: (options.CLI_VERSION ? false : true) });
             const cliPath = yield (0, io_1.which)(constants_1.constants.CLI_PREFIX, true);
             core.info(`✅ CLI for Microsoft 365 successfully installed at ${cliPath}`);
             core.info('ℹ️ Attempting to log in...');

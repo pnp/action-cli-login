@@ -6,6 +6,7 @@ export interface Options {
     CERTIFICATE_PASSWORD: string;
     APP_ID: string;
     TENANT: string;
+    CLI_VERSION: string;
 }
 
 export function validate(options: Options): void | Error {

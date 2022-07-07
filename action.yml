@@ -19,6 +19,9 @@ inputs:
   TENANT:
     description: "ID of the tenant from which accounts should be able to authenticate. Use common or organization if the app is multitenant. If not specified, use the tenant specified in the 'CLIMICROSOFT365_TENANT' environment variable. If the environment variable is not defined, use 'common' as the tenant identifier"
     required: false
+  CLI_VERSION:
+    description: "When specified, installs the requested version or tag of the CLI"
+    required: false
 runs:
   using: "node16"
   main: "dist/index.js"

@@ -1,7 +1,7 @@
 import * as core from '@actions/core';
 import { exec } from '@actions/exec';
 import { which } from '@actions/io';
-import { getLoginCommand } from './commands';
+import { getInstallCommand, getLoginCommand } from './commands';
 import { constants } from './constants';
 import { getOptions } from './utils';
 import { Options, validate } from './validate';
@@ -14,14 +14,24 @@ async function run(): Promise<void> {
         constants.ACTION_CERTIFICATE_ENCODED,
         constants.ACTION_CERTIFICATE_PASSWORD,
         constants.ACTION_APP_ID,
-        constants.ACTION_TENANT
+        constants.ACTION_TENANT,
+        constants.ACTION_CLI_VERSION
     ]);
 
     try {
         validate(options);
 
-        core.info('ℹ️ Installing CLI for Microsoft 365...');
-        await exec(constants.CLI_NPMINSTALL_COMMAND, [], { silent: true });
+        const installCommand = getInstallCommand(options);
+
+        if (options.CLI_VERSION) {
+            core.info(`☑ Installing CLI for Microsoft 365 (version / tag [${options.CLI_VERSION}])...`);
+        }
+        else {
+            core.info('ℹ️ Installing CLI for Microsoft 365...');
+        }
+
+        await exec(`${installCommand}`, [], { silent: (options.CLI_VERSION ? false : true) });
+        
         const cliPath = await which(constants.CLI_PREFIX, true);
         core.info(`✅ CLI for Microsoft 365 successfully installed at ${cliPath}`);
 
