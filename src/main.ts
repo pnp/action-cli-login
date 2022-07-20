@@ -15,15 +15,15 @@ async function run(): Promise<void> {
         constants.ACTION_CERTIFICATE_PASSWORD,
         constants.ACTION_APP_ID,
         constants.ACTION_TENANT,
-        constants.ACTION_USE_NEXT
+        constants.ACTION_CLI_VERSION
     ]);
 
     try {
         validate(options);
 
-        if (options.USE_NEXT) {
-            core.info('ℹ️ Installing CLI for Microsoft 365 (next version)...');
-            await exec(constants.CLI_NEXT_NPMINSTALL_COMMAND, [], { silent: true });
+        if (options.CLI_VERSION) {
+            core.info(`☑ Installing CLI for Microsoft 365 (version / tag [${options.CLI_VERSION}])...`);
+            await exec(`${constants.CLI_NPMINSTALL_COMMAND}@${options.CLI_VERSION}`, [], { silent: false });
         }
         else {
             core.info('ℹ️ Installing CLI for Microsoft 365...');

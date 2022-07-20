@@ -1,6 +1,5 @@
 export const constants = {
     CLI_NPMINSTALL_COMMAND: 'npm i -g @pnp/cli-microsoft365',
-    CLI_NEXT_NPMINSTALL_COMMAND: 'npm i -g @pnp/cli-microsoft365@next',
     CLI_PREFIX: 'm365',
     ACTION_ADMIN_USERNAME: 'ADMIN_USERNAME',
     ACTION_ADMIN_PASSWORD: 'ADMIN_PASSWORD',
@@ -8,5 +7,5 @@ export const constants = {
     ACTION_CERTIFICATE_PASSWORD: 'CERTIFICATE_PASSWORD',
     ACTION_APP_ID: 'APP_ID',
     ACTION_TENANT: 'TENANT',
-    ACTION_USE_NEXT: 'USE_NEXT',
+    ACTION_CLI_VERSION: 'CLI_VERSION',
 }

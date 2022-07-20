@@ -54,7 +54,6 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.constants = void 0;
 exports.constants = {
     CLI_NPMINSTALL_COMMAND: 'npm i -g @pnp/cli-microsoft365',
-    CLI_NEXT_NPMINSTALL_COMMAND: 'npm i -g @pnp/cli-microsoft365@next',
     CLI_PREFIX: 'm365',
     ACTION_ADMIN_USERNAME: 'ADMIN_USERNAME',
     ACTION_ADMIN_PASSWORD: 'ADMIN_PASSWORD',
@@ -62,7 +61,7 @@ exports.constants = {
     ACTION_CERTIFICATE_PASSWORD: 'CERTIFICATE_PASSWORD',
     ACTION_APP_ID: 'APP_ID',
     ACTION_TENANT: 'TENANT',
-    ACTION_USE_NEXT: 'USE_NEXT',
+    ACTION_CLI_VERSION: 'CLI_VERSION',
 };
 //# sourceMappingURL=constants.js.map
 
@@ -99,13 +98,13 @@ function run() {
             constants_1.constants.ACTION_CERTIFICATE_PASSWORD,
             constants_1.constants.ACTION_APP_ID,
             constants_1.constants.ACTION_TENANT,
-            constants_1.constants.ACTION_USE_NEXT
+            constants_1.constants.ACTION_CLI_VERSION
         ]);
         try {
             (0, validate_1.validate)(options);
-            if (options.USE_NEXT) {
-                core.info('ℹ️ Installing CLI for Microsoft 365 (next version)...');
-                yield (0, exec_1.exec)(constants_1.constants.CLI_NEXT_NPMINSTALL_COMMAND, [], { silent: true });
+            if (options.CLI_VERSION) {
+                core.info(`☑ Installing CLI for Microsoft 365 (version / tag [${options.CLI_VERSION}])...`);
+                yield (0, exec_1.exec)(`${constants_1.constants.CLI_NPMINSTALL_COMMAND}@${options.CLI_VERSION}`, [], { silent: false });
             }
             else {
                 core.info('ℹ️ Installing CLI for Microsoft 365...');
