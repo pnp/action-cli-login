@@ -1,5 +1,6 @@
 import * as assert from 'assert';
-import { getLoginCommand, } from './commands';
+import { getInstallCommand, getLoginCommand, } from './commands';
+import { constants } from './constants';
 import { Options } from './validate';
 
 describe('commands', () => {
@@ -117,4 +118,35 @@ describe('commands', () => {
         });
     });
 
+    describe('getInstallCommand', () => {
+        it('returns correct install command (latest version of the CLI)', () => {
+            const options: Options = {
+                ADMIN_USERNAME: 'adminUsername',
+                ADMIN_PASSWORD: 'adminPassword',
+                CERTIFICATE_ENCODED: '',
+                CERTIFICATE_PASSWORD: '',
+                APP_ID: '',
+                TENANT: '',
+                CLI_VERSION: ''
+            };
+            const expected = constants.CLI_NPMINSTALL_COMMAND;
+            const actual = getInstallCommand(options);
+            assert.equal(actual, expected);
+        });
+
+        it('returns correct install command (specific version of the CLI)', () => {
+            const options: Options = {
+                ADMIN_USERNAME: 'adminUsername',
+                ADMIN_PASSWORD: 'adminPassword',
+                CERTIFICATE_ENCODED: '',
+                CERTIFICATE_PASSWORD: '',
+                APP_ID: '',
+                TENANT: '',
+                CLI_VERSION: '5.4.0'
+            };
+            const expected = `${constants.CLI_NPMINSTALL_COMMAND}@${options.CLI_VERSION}`;
+            const actual = getInstallCommand(options);
+            assert.equal(actual, expected);
+        });
+    });
 });

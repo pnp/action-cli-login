@@ -19,7 +19,7 @@ Create a workflow `.yml` file in your `.github/workflows` directory. An [example
 - `CERTIFICATE_PASSWORD` : Password for the certificate
 - `APP_ID` : App ID of the Azure AD application to use for certificate authentication. If not specified, use the app specified in the 'CLIMICROSOFT365_AADAPPID' environment variable. If the environment variable is not defined, use the multitenant PnP Management Shell app
 - `TENANT` : ID of the tenant from which accounts should be able to authenticate. Use `common` or `organization` if the app is multitenant. If not specified, use the tenant specified in the `CLIMICROSOFT365_TENANT` environment variable. If the environment variable is not defined, it will use `common` as the tenant identifier
-- `CLI_VERSION` : When specified, installs the requested version or tag of the CLI
+- `CLI_VERSION` : Accepts `latest`, `next` or a specific version tag. Otherwise, installs the `latest` version when omitted
 
 All inputs are optional. But depending of the authentication type chosen, following pair of inputs will be necessary:
 
@@ -163,7 +163,7 @@ jobs:
         APP_ID: ${{ secrets.APP_ID }}
         CERTIFICATE_ENCODED: ${{ secrets.CERTIFICATE_ENCODED }}
         CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
-        CLI_VERSION: true
+        CLI_VERSION: next
     
     ##
     ## Code to deploy the package to tenant omitted
