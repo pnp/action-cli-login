@@ -44,11 +44,6 @@
       "web": "https://blog.mastykarz.nl"
     },
     {
-      "name": "Velin Georgiev",
-      "email": "velin.georgiev@gmail.com",
-      "web": "https://blog.velingeorgiev.com"
-    },
-    {
       "name": "Garry Trinder",
       "email": "garry.trinder@live.com",
       "web": "https://garrytrinder.github.io/"
@@ -72,6 +67,26 @@
       "name": "Arjun Menon",
       "email": "arjun.umenon@gmail.com",
       "web": "https://arjunumenon.com/"
+    },
+    {
+      "name": "Adam Wojcik",
+      "email": "adam.wojcik.it@gmail.com",
+      "web": "https://github.com/Adam-it/"
+    },
+    {
+      "name": "Martin Lingstuyl",
+      "email": "mlingstuyl@live.com",
+      "web": "https://www.blimped.nl/"
+    },
+    {
+      "name": "Jasey Waegebaert",
+      "email": "jaseyw@gmigroup.be",
+      "web": "https://github.com/Jwaegebaert"
+    },
+    {
+      "name": "Milan Holemans",
+      "email": "Milan.Holemans@vanroey.be",
+      "web": "https://github.com/milanholemans"
     }
   ],
   "contributors": [
