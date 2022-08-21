@@ -75,7 +75,7 @@ jobs:
 
     # CLI for Microsoft 365 login action
     - name: Login to tenant
-      uses: pnp/action-cli-login@v2.1.0
+      uses: pnp/action-cli-login@v2
       with:
         ADMIN_USERNAME:  ${{ secrets.ADMIN_USERNAME }}
         ADMIN_PASSWORD:  ${{ secrets.ADMIN_PASSWORD }}
@@ -115,7 +115,7 @@ jobs:
 
     # CLI for Microsoft 365 login action
     - name: Login to tenant
-      uses: pnp/action-cli-login@v2.1.0
+      uses: pnp/action-cli-login@v2
       with:
         TENANT: ${{ secrets.TENANT }}
         APP_ID: ${{ secrets.APP_ID }}
@@ -157,7 +157,7 @@ jobs:
 
     # CLI for Microsoft 365 login action
     - name: Login to tenant
-      uses: pnp/action-cli-login@v2.1.0
+      uses: pnp/action-cli-login@v2
       with:
         TENANT: ${{ secrets.TENANT }}
         APP_ID: ${{ secrets.APP_ID }}
@@ -173,21 +173,3 @@ jobs:
 #### Self-hosted runners
 
 If self-hosted runners are used for running the workflow, then please make sure that they have `PowerShell` or `bash` installed on them.
-
-## Release notes
-
-### v2.2.0
-
-- Adds CLI_VERSION option. Closes #19
-
-### v2.1.0
-
-- Adds certificate login. Closes #12
-
-### v2.0.0
-
-- Renames action to 'CLI for Microsoft 365'
-
-### v1.0.0
-
-- Added inital 'Office 365 CLI login' GitHub action solving #2
