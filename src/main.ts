@@ -13,6 +13,7 @@ async function run(): Promise<void> {
         constants.ACTION_ADMIN_PASSWORD,
         constants.ACTION_CERTIFICATE_ENCODED,
         constants.ACTION_CERTIFICATE_PASSWORD,
+        constants.ACTION_IDENTITY,
         constants.ACTION_APP_ID,
         constants.ACTION_TENANT,
         constants.ACTION_CLI_VERSION

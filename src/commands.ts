@@ -5,6 +5,12 @@ import { Options } from './validate';
 export function getLoginCommand(options: Options): string {
     let authCommand: string;
 
+    if (options.IDENTITY) {
+        if (isNullOrEmpty(options.ADMIN_USERNAME)) { throw new Error('ADMIN_USERNAME is required'); };
+        if (isNullOrEmpty(options.TENANT)) { throw new Error('TENANT is required'); };
+
+        return `login --authType identity --userName ${options.ADMIN_USERNAME} --tenant ${options.TENANT}`;
+    }
     if (options.ADMIN_USERNAME || options.ADMIN_PASSWORD) {
         if (isNullOrEmpty(options.ADMIN_USERNAME)) { throw new Error('ADMIN_USERNAME is required'); };
         if (isNullOrEmpty(options.ADMIN_PASSWORD)) { throw new Error('ADMIN_PASSWORD is required'); };

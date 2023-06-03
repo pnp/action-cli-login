@@ -13,6 +13,7 @@ describe('commands', () => {
                 ADMIN_PASSWORD: 'adminPassword',
                 CERTIFICATE_ENCODED: '',
                 CERTIFICATE_PASSWORD: '',
+                IDENTITY: false,
                 APP_ID: '',
                 TENANT: '',
                 CLI_VERSION: ''
@@ -28,6 +29,7 @@ describe('commands', () => {
                 ADMIN_PASSWORD: '',
                 CERTIFICATE_ENCODED: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
                 CERTIFICATE_PASSWORD: '',
+                IDENTITY: false,
                 APP_ID: '36e3a540-6f25-4483-9542-9f5fa00bb633',
                 TENANT: '187d6ed4-5c94-40eb-87c7-d311ec5f647a',
                 CLI_VERSION: ''
@@ -43,11 +45,28 @@ describe('commands', () => {
                 ADMIN_PASSWORD: '',
                 CERTIFICATE_ENCODED: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
                 CERTIFICATE_PASSWORD: 'Pass@w0rd!',
+                IDENTITY: false,
                 APP_ID: '36e3a540-6f25-4483-9542-9f5fa00bb633',
                 TENANT: '187d6ed4-5c94-40eb-87c7-d311ec5f647a',
                 CLI_VERSION: ''
             };
             const expected = 'login --authType certificate --certificateBase64Encoded ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 --password Pass@w0rd! --appId 36e3a540-6f25-4483-9542-9f5fa00bb633 --tenant 187d6ed4-5c94-40eb-87c7-d311ec5f647a';
+            const actual = getLoginCommand(options);
+            assert.equal(actual, expected);
+        });
+
+        it('returns correct command with options (authType identity)', () => {
+            const options: Options = {
+                ADMIN_USERNAME: '36e3a540-6f25-4483-9542-9f5fa00bb633',
+                ADMIN_PASSWORD: '',
+                CERTIFICATE_ENCODED: '',
+                CERTIFICATE_PASSWORD: '',
+                IDENTITY: true,
+                APP_ID: '',
+                TENANT: '187d6ed4-5c94-40eb-87c7-d311ec5f647a',
+                CLI_VERSION: ''
+            };
+            const expected = 'login --authType identity --userName 36e3a540-6f25-4483-9542-9f5fa00bb633 --tenant 187d6ed4-5c94-40eb-87c7-d311ec5f647a';
             const actual = getLoginCommand(options);
             assert.equal(actual, expected);
         });
@@ -58,6 +77,7 @@ describe('commands', () => {
                 ADMIN_PASSWORD: 'adminPassword',
                 CERTIFICATE_ENCODED: '',
                 CERTIFICATE_PASSWORD: '',
+                IDENTITY: false,
                 APP_ID: '',
                 TENANT: '',
                 CLI_VERSION: ''
@@ -71,6 +91,7 @@ describe('commands', () => {
                 ADMIN_PASSWORD: '',
                 CERTIFICATE_ENCODED: '',
                 CERTIFICATE_PASSWORD: '',
+                IDENTITY: false,
                 APP_ID: '',
                 TENANT: '',
                 CLI_VERSION: ''
@@ -84,6 +105,7 @@ describe('commands', () => {
                 ADMIN_PASSWORD: 'adminPassword',
                 CERTIFICATE_ENCODED: '',
                 CERTIFICATE_PASSWORD: '',
+                IDENTITY: false,
                 APP_ID: '',
                 TENANT: '',
                 CLI_VERSION: ''
@@ -97,6 +119,7 @@ describe('commands', () => {
                 ADMIN_PASSWORD: '',
                 CERTIFICATE_ENCODED: '',
                 CERTIFICATE_PASSWORD: '',
+                IDENTITY: false,
                 APP_ID: '',
                 TENANT: '',
                 CLI_VERSION: ''
@@ -110,11 +133,42 @@ describe('commands', () => {
                 ADMIN_PASSWORD: '',
                 CERTIFICATE_ENCODED: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
                 CERTIFICATE_PASSWORD: '',
+                IDENTITY: false,
                 APP_ID: '',
                 TENANT: '',
                 CLI_VERSION: ''
             };
             assert.doesNotThrow(() => getLoginCommand(options), Error);
+        });
+
+        it('throws error if IDENTITY is passed without ADMIN_USERNAME', () => {
+            const options: Options = {
+                ADMIN_USERNAME: '',
+                ADMIN_PASSWORD: '',
+                CERTIFICATE_ENCODED: '',
+                CERTIFICATE_PASSWORD: '',
+                IDENTITY: true,
+                APP_ID: '',
+                TENANT: '187d6ed4-5c94-40eb-87c7-d311ec5f647a',
+                CLI_VERSION: ''
+            };
+
+            assert.throws(() => getLoginCommand(options), Error, 'ADMIN_USERNAME is required');
+        });
+
+        it('throws error if IDENTITY is passed without TENANT', () => {
+            const options: Options = {
+                ADMIN_USERNAME: '36e3a540-6f25-4483-9542-9f5fa00bb633',
+                ADMIN_PASSWORD: '',
+                CERTIFICATE_ENCODED: '',
+                CERTIFICATE_PASSWORD: '',
+                IDENTITY: true,
+                APP_ID: '',
+                TENANT: '',
+                CLI_VERSION: ''
+            };
+
+            assert.throws(() => getLoginCommand(options), Error, 'TENANT is required');
         });
     });
 
@@ -125,6 +179,7 @@ describe('commands', () => {
                 ADMIN_PASSWORD: 'adminPassword',
                 CERTIFICATE_ENCODED: '',
                 CERTIFICATE_PASSWORD: '',
+                IDENTITY: false,
                 APP_ID: '',
                 TENANT: '',
                 CLI_VERSION: ''
@@ -140,6 +195,7 @@ describe('commands', () => {
                 ADMIN_PASSWORD: 'adminPassword',
                 CERTIFICATE_ENCODED: '',
                 CERTIFICATE_PASSWORD: '',
+                IDENTITY: false,
                 APP_ID: '',
                 TENANT: '',
                 CLI_VERSION: '5.4.0'
