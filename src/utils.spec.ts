@@ -40,13 +40,14 @@ describe('utils', () => {
         });
 
         it('returns correct object', () => {
-            const optionsList: string[] = ['ADMIN_USERNAME', 'ADMIN_PASSWORD', 'CERTIFICATE_ENCODED', 'CERTIFICATE_PASSWORD', 'APP_ID', 'TENANT', 'CLI_VERSION'];
+            const optionsList: string[] = ['ADMIN_USERNAME', 'ADMIN_PASSWORD', 'CERTIFICATE_ENCODED', 'IDENTITY', 'CERTIFICATE_PASSWORD', 'APP_ID', 'TENANT', 'CLI_VERSION'];
             const actual: Options = getOptions(optionsList);
             const expected: Options = {
                 ADMIN_USERNAME: '',
                 ADMIN_PASSWORD: '',
                 CERTIFICATE_ENCODED: '',
                 CERTIFICATE_PASSWORD: '',
+                IDENTITY: false,
                 APP_ID: '',
                 TENANT: '',
                 CLI_VERSION: ''

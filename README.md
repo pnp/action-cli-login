@@ -13,13 +13,16 @@ Create a workflow `.yml` file in your `.github/workflows` directory. An [example
 
 ### Inputs
 
-- `ADMIN_USERNAME` : Username (upn) of the admin
-- `ADMIN_PASSWORD` : Password of the admin
-- `CERTIFICATE_ENCODED` : Base64-encoded string with certificate private key
-- `CERTIFICATE_PASSWORD` : Password for the certificate
-- `APP_ID` : App ID of the Azure AD application to use for certificate authentication. If not specified, use the app specified in the 'CLIMICROSOFT365_AADAPPID' environment variable. If the environment variable is not defined, use the multitenant PnP Management Shell app
-- `TENANT` : ID of the tenant from which accounts should be able to authenticate. Use `common` or `organization` if the app is multitenant. If not specified, use the tenant specified in the `CLIMICROSOFT365_TENANT` environment variable. If the environment variable is not defined, it will use `common` as the tenant identifier
-- `CLI_VERSION` : Accepts `latest`, `next` or a specific version tag. Otherwise, installs the `latest` version when omitted
+Name | Type | Description
+--- | --- | ---
+`ADMIN_USERNAME` | string | Username (upn) of the admin, or ID of the user managed identity.
+`ADMIN_PASSWORD` | string | Password of the admin.
+`CERTIFICATE_ENCODED` | string | Base64-encoded string with certificate private key.
+`CERTIFICATE_PASSWORD` | string | Password for the certificate.
+`IDENTITY` | boolean | Use managed identity.
+`APP_ID` | string | App ID of the Azure AD application to use for certificate authentication. If not specified, use the app specified in the 'CLIMICROSOFT365_AADAPPID' environment variable. If the environment variable is not defined, use the multitenant PnP Management Shell app.
+`TENANT` | string | ID of the tenant from which accounts should be able to authenticate. Use `common` or `organization` if the app is multitenant. If not specified, use the tenant specified in the `CLIMICROSOFT365_TENANT` environment variable. If the environment variable is not defined, it will use `common` as the tenant identifier.
+`CLI_VERSION` | string | Accepts `latest`, `next` or a specific version tag. Otherwise, installs the `latest` version when omitted.
 
 All inputs are optional. But depending of the authentication type chosen, following pair of inputs will be necessary:
 
@@ -121,6 +124,47 @@ jobs:
         APP_ID: ${{ secrets.APP_ID }}
         CERTIFICATE_ENCODED: ${{ secrets.CERTIFICATE_ENCODED }}
         CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+
+    ##
+    ## Code to deploy the package to tenant omitted
+    ##
+```
+
+### Example workflow - CLI for Microsoft 365 Login (user assigned managed identity authentication)
+
+On every `push` build the code and then login to Microsoft 365 before deploying, using user assigned managed identity authentication.
+
+```yaml
+name: SPFx CICD with Cli for Microsoft 365
+
+on: [push]
+
+jobs:
+  build:
+    ##
+    ## Build code omitted
+    ##
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+
+    ##
+    ## Code to get the package omitted
+    ##
+
+    # CLI for Microsoft 365 login action
+    - name: Login to tenant
+      uses: pnp/action-cli-login@v2
+      with:
+        IDENTITY: true
+        ADMIN_USERNAME: 36e3a540-6f25-4483-9542-9f5fa00bb633
+        TENANT: 187d6ed4-5c94-40eb-87c7-d311ec5f647a
 
     ##
     ## Code to deploy the package to tenant omitted
