@@ -1,6 +1,6 @@
 {
   "name": "@pnp/action-cli-login",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "GitHub Action to Login to a tenant using CLI for Microsoft 365",
   "main": "dist/index.js",
   "scripts": {
@@ -40,40 +40,14 @@
     "Tatti, Anoop <anoop@live.co.uk>",
     "Trinder, Garry <garry.trinder@live.com>"
   ],
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pnp/action-cli-login.git"
-  },
-  "homepage": "https://pnp.github.io/action-cli-login/",
-  "bugs": {
-    "url": "https://github.com/pnp/action-cli-login/issues"
-  },
-  "keywords": [
-    "office 365",
-    "microsoft 365",
-    "sharepoint framework",
-    "o365",
-    "m365",
-    "spfx",
-    "sharepoint online",
-    "sharepoint",
-    "microsoft teams",
-    "microsoft graph",
-    "microsoft flow",
-    "azure active directory",
-    "azure ad",
-    "azure",
-    "microsoft"
-  ],
   "dependencies": {
-    "@actions/core": "^1.6.0",
-    "@actions/exec": "^1.1.0",
-    "@actions/io": "^1.1.1"
+    "@actions/core": "1.10.0",
+    "@actions/exec": "1.1.1",
+    "@actions/io": "1.1.3"
   },
   "devDependencies": {
-    "@types/node": "^16.11.6",
-    "@vercel/ncc": "^0.31.1",
-    "typescript": "^4.4.4"
+    "@types/node": "18.16.19",
+    "@vercel/ncc": "0.36.1",
+    "typescript": "5.1.6"
   }
 }
