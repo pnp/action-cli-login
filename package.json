@@ -2,21 +2,42 @@
   "name": "@pnp/action-cli-login",
   "version": "2.0.2",
   "description": "GitHub Action to Login to a tenant using CLI for Microsoft 365",
+  "license": "MIT",
   "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pnp/action-cli-login.git"
+  },
+  "homepage": "https://pnp.github.io/action-cli-login/",
+  "bugs": {
+    "url": "https://github.com/pnp/action-cli-login/issues"
+  },
   "scripts": {
     "build": "ncc build src/main.ts"
   },
-  "author": "Tatti, Anoop <anoop@live.co.uk>",
+  "keywords": [
+    "office 365",
+    "microsoft 365",
+    "sharepoint framework",
+    "o365",
+    "m365",
+    "spfx",
+    "sharepoint online",
+    "sharepoint",
+    "microsoft teams",
+    "microsoft graph",
+    "microsoft flow",
+    "azure active directory",
+    "azure ad",
+    "azure",
+    "microsoft"
+  ],
+  "author": "https://github.com/pnp/action-cli-login/graphs/contributors",
   "maintainers": [
     {
       "name": "Waldek Mastykarz",
       "email": "waldek@mastykarz.nl",
       "web": "https://blog.mastykarz.nl"
-    },
-    {
-      "name": "Velin Georgiev",
-      "email": "velin.georgiev@gmail.com",
-      "web": "https://blog.velingeorgiev.com"
     },
     {
       "name": "Garry Trinder",
@@ -32,6 +53,36 @@
       "name": "Rabia Williams",
       "email": "rabiawilliams@gmail.com",
       "web": "https://rabiawilliams.com/"
+    },
+    {
+      "name": "Patrick Lamber",
+      "email": "patrick@nubo.eu",
+      "web": "https://www.nubo.eu/"
+    },
+    {
+      "name": "Arjun Menon",
+      "email": "arjun.umenon@gmail.com",
+      "web": "https://arjunumenon.com/"
+    },
+    {
+      "name": "Adam Wojcik",
+      "email": "adam.wojcik.it@gmail.com",
+      "web": "https://github.com/Adam-it/"
+    },
+    {
+      "name": "Martin Lingstuyl",
+      "email": "mlingstuyl@live.com",
+      "web": "https://www.blimped.nl/"
+    },
+    {
+      "name": "Jasey Waegebaert",
+      "email": "jaseyw@gmigroup.be",
+      "web": "https://github.com/Jwaegebaert"
+    },
+    {
+      "name": "Milan Holemans",
+      "email": "Milan.Holemans@vanroey.be",
+      "web": "https://github.com/milanholemans"
     }
   ],
   "contributors": [
@@ -39,7 +90,7 @@
     "Mastykarz, Waldek <waldek@mastykarz.nl>",
     "Tatti, Anoop <anoop@live.co.uk>",
     "Trinder, Garry <garry.trinder@live.com>"
-  ],
+  ],  
   "dependencies": {
     "@actions/core": "1.10.0",
     "@actions/exec": "1.1.1",
