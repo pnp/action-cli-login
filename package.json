@@ -1,6 +1,6 @@
 {
   "name": "@pnp/action-cli-login",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "GitHub Action to Login to a tenant using CLI for Microsoft 365",
   "license": "MIT",
   "main": "lib/main.js",
@@ -97,16 +97,16 @@
     "Trinder, Garry <garry.trinder@live.com>"
   ],
   "dependencies": {
-    "@actions/core": "^1.9.1",
-    "@actions/exec": "^1.1.1",
-    "@actions/io": "^1.1.2"
+    "@actions/core": "1.10.0",
+    "@actions/exec": "1.1.1",
+    "@actions/io": "1.1.3"
   },
   "devDependencies": {
-    "@types/mocha": "^9.1.1",
-    "@types/node": "^16.11.51",
-    "@vercel/ncc": "^0.31.1",
-    "c8": "^7.12.0",
-    "mocha": "^9.2.2",
-    "typescript": "^4.7.4"
+    "@types/mocha": "10.0.1",
+    "@types/node": "18.16.19",
+    "@vercel/ncc": "0.36.1",
+    "c8": "8.0.0",
+    "mocha": "10.2.0",
+    "typescript": "5.1.6"
   }
 }
