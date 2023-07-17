@@ -23,8 +23,8 @@ inputs:
     description: "When specified, installs the requested version or tag of the CLI"
     required: false
 runs:
-  using: "node18"
+  using: "node16"
   main: "dist/index.js"
 branding:
-  icon: "log-in"  
+  icon: "log-in"
   color: "blue"
