@@ -3,7 +3,7 @@
   "version": "2.2.3",
   "description": "GitHub Action to Login to a tenant using CLI for Microsoft 365",
   "license": "MIT",
-  "main": "lib/main.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pnp/action-cli-login.git"
