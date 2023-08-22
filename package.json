@@ -13,11 +13,14 @@
     "url": "https://github.com/pnp/action-cli-login/issues"
   },
   "scripts": {
-    "test": "mocha \"lib/**/*.spec.js\"",
-    "test:cov": "c8 npm run test",
+    "dev": "concurrently \"npm:watch\" \"npm:package:watch\"",
     "build": "tsc -p .",
+    "clean": "rimraf ./lib",
     "watch": "tsc -w -p .",
-    "package": "ncc build --source-map"
+    "package": "ncc build --source-map",
+    "package:watch": "ncc build --watch --source-map",
+    "test": "mocha \"lib/**/*.spec.js\"",
+    "test:cov": "c8 npm run test"
   },
   "keywords": [
     "office 365",
@@ -107,6 +110,7 @@
     "@types/node": "18.16.19",
     "@vercel/ncc": "0.36.1",
     "c8": "8.0.0",
+    "concurrently": "8.2.1",
     "mocha": "10.2.0",
     "source-map-support": "0.5.21",
     "typescript": "5.1.6"
