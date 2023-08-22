@@ -93,7 +93,7 @@
     "Georgiev, Velin <velin.georgiev@gmail.com>",
     "Holemans, Milan <Milan.Holemans@vanroey.be>",
     "Maillot, Michaël <battosaimykle@gmail.com>",
-    "Mastykarz, Waldek <waldek@mastykarz.nl>",    
+    "Mastykarz, Waldek <waldek@mastykarz.nl>",
     "Tatti, Anoop <anoop@live.co.uk>",
     "Trinder, Garry <garry.trinder@live.com>"
   ],
@@ -108,6 +108,7 @@
     "@vercel/ncc": "0.36.1",
     "c8": "8.0.0",
     "mocha": "10.2.0",
+    "source-map-support": "0.5.21",
     "typescript": "5.1.6"
   }
 }

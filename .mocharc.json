@@ -1,0 +1,12 @@
+{
+    "extension": [
+      "ts"
+    ],
+    "spec": "lib/**/*.spec.js",
+    "reporter": "min",
+    "require": "source-map-support/register",
+    "watch": "lib/**/*.js",
+    "timeout": 10000,
+    "logpanel": true,
+    "skip-full": true
+  }
