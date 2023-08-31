@@ -1,30 +1,30 @@
-name: "CLI for Microsoft 365 Login"
-description: "Login to tenant using CLI for Microsoft 365"
+name: CLI for Microsoft 365 Login
+description: Login to tenant using CLI for Microsoft 365
 inputs:
   ADMIN_USERNAME:
-    description: "Username (upn) of the admin"
+    description: Username (upn) of the admin
     required: false
   ADMIN_PASSWORD:
-    description: "Password of the admin"
+    description: Password of the admin
     required: false
   CERTIFICATE_ENCODED:
-    description: "Base64-encoded string with certificate private key"
+    description: Base64-encoded string with certificate private key
     required: false
   CERTIFICATE_PASSWORD:
-    description: "Password for the certificate"
+    description: Password for the certificate
     required: false
   APP_ID:
-    description: "App ID of the Azure AD application to use for authentication. If not specified, use the app specified in the 'CLIMICROSOFT365_AADAPPID' environment variable. If the environment variable is not defined, use the multitenant PnP Management Shell app"
+    description: App ID of the Azure AD application to use for authentication. If not specified, use the app specified in the 'CLIMICROSOFT365_AADAPPID' environment variable. If the environment variable is not defined, use the multitenant PnP Management Shell app
     required: false
   TENANT:
-    description: "ID of the tenant from which accounts should be able to authenticate. Use common or organization if the app is multitenant. If not specified, use the tenant specified in the 'CLIMICROSOFT365_TENANT' environment variable. If the environment variable is not defined, use 'common' as the tenant identifier"
+    description: ID of the tenant from which accounts should be able to authenticate. Use common or organization if the app is multitenant. If not specified, use the tenant specified in the 'CLIMICROSOFT365_TENANT' environment variable. If the environment variable is not defined, use 'common' as the tenant identifier
     required: false
   CLI_VERSION:
-    description: "When specified, installs the requested version or tag of the CLI"
+    description: When specified, installs the requested version or tag of the CLI
     required: false
 runs:
-  using: "node16"
-  main: "dist/index.js"
+  using: node16
+  main: dist/index.js
 branding:
-  icon: "log-in"
-  color: "blue"
+  icon: log-in
+  color: blue

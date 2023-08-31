@@ -1,11 +1,11 @@
 {
     "exclude": [
-        "**/*.spec.js"
+      "**/*.spec.js"
     ],
     "reporter": [
-        "lcov",
-        "text",
-        "text-summary"
+      "lcov",
+      "text",
+      "text-summary"
     ],
     "check-coverage": true,
     "branches": 100,
@@ -13,4 +13,4 @@
     "lines": 100,
     "statements": 100,
     "skip-full": true
-}
+  }
