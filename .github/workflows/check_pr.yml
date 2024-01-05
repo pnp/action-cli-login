@@ -3,7 +3,9 @@ name: Check PR
 on: pull_request
 
 jobs:
+
   build:
+
     if: github.repository_owner == 'pnp'
     runs-on: ${{ matrix.os }}
     strategy:
@@ -12,12 +14,14 @@ jobs:
         node: [18]
 
     steps:
+
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
           registry-url: "https://registry.npmjs.org"
+
       - name: Cache node modules
         id: cache
         uses: actions/cache@v3
@@ -25,23 +29,30 @@ jobs:
           path: |
             **/node_modules
           key: node_modules-${{ matrix.os }}-${{ matrix.node }}-${{ hashFiles('**/npm-shrinkwrap.json') }}
+
       - name: Restore dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
+
       - name: Build
         run: npm run build
+
       - name: Compress output (non-Windows)
         if: matrix.os != 'windows-latest'
         run: tar -cvf build.tar --exclude node_modules ./
+
       - name: Compress output (Windows)
         if: matrix.os == 'windows-latest'
         run: 7z a -ttar -xr!node_modules -r build.tar .
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
           name: build-${{ matrix.os }}-${{ matrix.node }}
           path: build.tar
+
   test:
+
     if: github.repository_owner == 'pnp'
     needs: build
     runs-on: ${{ matrix.os }}
@@ -52,6 +63,7 @@ jobs:
         nodeBuild: [18]
 
     steps:
+
       - name: Configure pagefile
         if: matrix.os == 'windows-latest'
         uses: al-cheb/configure-pagefile-action@v1.3
@@ -59,20 +71,25 @@ jobs:
           minimum-size: 16GB
           maximum-size: 16GB
           disk-root: "C:"
+
       - uses: actions/download-artifact@v3
         with:
           name: build-${{ matrix.os }}-${{ matrix.nodeBuild }}
+
       - name: Unpack build artifact (non-Windows)
         if: matrix.os != 'windows-latest'
         run: tar -xvf build.tar && rm build.tar
+
       - name: Unpack build artifact (Windows)
         if: matrix.os == 'windows-latest'
         run: 7z x build.tar && del build.tar
+
       - name: Use Node.js ${{ matrix.nodeRun }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.nodeRun }}
           registry-url: "https://registry.npmjs.org"
+
       - name: Cache node modules
         id: cache
         uses: actions/cache@v3
@@ -80,13 +97,17 @@ jobs:
           path: |
             **/node_modules
           key: node_modules-${{ matrix.os }}-${{ matrix.nodeBuild }}-${{ hashFiles('**/npm-shrinkwrap.json') }}
+
       - name: Restore dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
+
       - name: Test without coverage
         run: npm test
+
       - name: Test with coverage
         run: npm run test:cov
+        
       - uses: actions/upload-artifact@v3
         with:
           name: coverage-${{ matrix.os }}-${{ matrix.nodeRun }}

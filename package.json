@@ -1,9 +1,9 @@
 {
   "name": "@pnp/action-cli-login",
-  "version": "2.2.4",
+  "version": "3.0.0",
   "description": "GitHub Action to Login to a tenant using CLI for Microsoft 365",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "lib/main.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pnp/action-cli-login.git"
@@ -13,14 +13,16 @@
     "url": "https://github.com/pnp/action-cli-login/issues"
   },
   "scripts": {
-    "dev": "concurrently \"npm:watch\" \"npm:package:watch\"",
-    "build": "tsc -p .",
-    "clean": "rimraf ./lib",
-    "watch": "tsc -w -p .",
-    "package": "ncc build --source-map",
-    "package:watch": "ncc build --watch --source-map",
-    "test": "mocha \"lib/**/*.spec.js\"",
-    "test:cov": "c8 npm run test"
+    "build": "npm run clean && npm run tsc && ncc build -m --source-map",
+    "build:watch": "ncc build --watch --source-map",
+    "clean": "rimraf ./lib ./dist",
+    "lint": "eslint --ext .ts src",
+    "test": "npm run lint && npm run test:cov",
+    "test:test": "mocha",
+    "test:cov": "c8 npm run test:test",
+    "tsc": "tsc -p .",
+    "tsc:watch": "tsc -w -p .",
+    "watch": "npm run clean && npm run tsc && concurrently \"npm:tsc:watch\" \"npm:build:watch\""
   },
   "keywords": [
     "adaptive card",
@@ -121,18 +123,22 @@
     "Trinder, Garry <garry.trinder@live.com>"
   ],
   "dependencies": {
-    "@actions/core": "1.10.0",
+    "@actions/core": "1.10.1",
     "@actions/exec": "1.1.1",
     "@actions/io": "1.1.3"
   },
   "devDependencies": {
-    "@types/mocha": "10.0.1",
-    "@types/node": "18.16.19",
-    "@vercel/ncc": "0.36.1",
-    "c8": "8.0.1",
-    "concurrently": "8.2.1",
+    "@types/mocha": "10.0.6",
+    "@types/node": "20.10.6",
+    "@typescript-eslint/eslint-plugin": "6.17.0",
+    "@typescript-eslint/parser": "6.17.0",
+    "@vercel/ncc": "0.38.1",
+    "c8": "9.0.0",
+    "concurrently": "8.2.2",
+    "eslint": "8.56.0",
     "mocha": "10.2.0",
+    "rimraf": "5.0.5",
     "source-map-support": "0.5.21",
-    "typescript": "5.1.6"
+    "typescript": "5.3.3"
   }
 }
