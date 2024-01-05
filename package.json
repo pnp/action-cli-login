@@ -1,6 +1,6 @@
 {
   "name": "@pnp/action-cli-login",
-  "version": "2.2.5",
+  "version": "3.0.0",
   "description": "GitHub Action to Login to a tenant using CLI for Microsoft 365",
   "license": "MIT",
   "main": "lib/main.js",
