@@ -1,10 +1,10 @@
 # CLI for Microsoft 365 Login
 
-GitHub action to login to a tenant using CLI for Microsoft 365.
+GitHub action to log in to a tenant using CLI for Microsoft 365.
 
 ![CLI for Microsoft 365](./images/pnp-cli-microsoft365-blue.svg)
 
-This GitHub Action (created using typescript) uses [CLI for Microsoft 365](https://pnp.github.io/cli-microsoft365/), specifically the [login command](https://pnp.github.io/cli-microsoft365/cmd/login), to allow you log in to Microsoft 365.
+This GitHub Action (created using typescript) uses [CLI for Microsoft 365](https://pnp.github.io/cli-microsoft365/), specifically the [login command](https://pnp.github.io/cli-microsoft365/cmd/login), to allow you to log in to Microsoft 365.
 
 ## Usage
 ### Pre-requisites
@@ -45,9 +45,9 @@ Since this action requires sensitive information such as user name, password and
 
 These secrets are encrypted and can only be used by GitHub actions.
 
-### Example workflow - CLI for Microsoft 365 Login (user name / password authentication)
+### Example workflow - CLI for Microsoft 365 Login (user name/password authentication)
 
-On every `push` build the code and then login to Microsoft 365 before deploying, using user login / password authentication.
+On every `push` build the code and then log in to Microsoft 365 before deploying, using user login/password authentication.
 
 ```yaml
 name: SPFx CICD with Cli for Microsoft 365
@@ -75,7 +75,7 @@ jobs:
 
     # CLI for Microsoft 365 login action
     - name: Login to tenant
-      uses: pnp/action-cli-login@v2
+      uses: pnp/action-cli-login@v3
       with:
         ADMIN_USERNAME:  ${{ secrets.ADMIN_USERNAME }}
         ADMIN_PASSWORD:  ${{ secrets.ADMIN_PASSWORD }}
@@ -87,7 +87,7 @@ jobs:
 
 ### Example workflow - CLI for Microsoft 365 Login (certificate authentication)
 
-On every `push` build the code and then login to Microsoft 365 before deploying, using certificate authentication.
+On every `push` build the code and then log in to Microsoft 365 before deploying, using certificate authentication.
 
 ```yaml
 name: SPFx CICD with Cli for Microsoft 365
@@ -115,7 +115,7 @@ jobs:
 
     # CLI for Microsoft 365 login action
     - name: Login to tenant
-      uses: pnp/action-cli-login@v2
+      uses: pnp/action-cli-login@v3
       with:
         TENANT: ${{ secrets.TENANT }}
         APP_ID: ${{ secrets.APP_ID }}
@@ -129,7 +129,7 @@ jobs:
 
 ### Example workflow - CLI for Microsoft 365 Login (beta version of the CLI)
 
-On every `push` build the code and then login to Microsoft 365 before deploying, using beta version of the CLI.
+On every `push` build the code and then log in to Microsoft 365 before deploying, using beta version of the CLI.
 
 ```yaml
 name: SPFx CICD with Cli for Microsoft 365
@@ -157,7 +157,7 @@ jobs:
 
     # CLI for Microsoft 365 login action
     - name: Login to tenant
-      uses: pnp/action-cli-login@v2
+      uses: pnp/action-cli-login@v3
       with:
         TENANT: ${{ secrets.TENANT }}
         APP_ID: ${{ secrets.APP_ID }}

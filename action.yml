@@ -1,5 +1,5 @@
 name: "CLI for Microsoft 365 Login"
-description: "Login to tenant using CLI for Microsoft 365"
+description: "Log in to tenant using CLI for Microsoft 365"
 inputs:
   ADMIN_USERNAME:
     description: "Username (upn) of the admin"
@@ -23,7 +23,7 @@ inputs:
     description: "When specified, installs the requested version or tag of the CLI"
     required: false
 runs:
-  using: "node16"
+  using: "node20"
   main: "dist/index.js"
 branding:
   icon: "log-in"
