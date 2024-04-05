@@ -35,6 +35,8 @@ async function run(): Promise<void> {
         const cliPath = await which(constants.CLI_PREFIX, true);
         core.info(`✅ CLI for Microsoft 365 successfully installed at ${cliPath}`);
 
+        await exec(`${constants.CLI_PREFIX} setup --scripting --output none`);
+
         core.info('ℹ️ Attempting to log in...');
         const loginCommand = getLoginCommand(options);
         await exec(`${constants.CLI_PREFIX} ${loginCommand}`, [], { });
