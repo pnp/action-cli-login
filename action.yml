@@ -14,7 +14,7 @@ inputs:
     description: "Password for the certificate"
     required: false
   APP_ID:
-    description: "App ID of the Azure AD application to use for authentication. If not specified, use the app specified in the 'CLIMICROSOFT365_AADAPPID' environment variable. If the environment variable is not defined, use the multitenant PnP Management Shell app"
+    description: "App ID of the Entra application to use for authentication. If not specified, use the app specified in the 'CLIMICROSOFT365_ENTRAAPPID' environment variable."
     required: false
   TENANT:
     description: "ID of the tenant from which accounts should be able to authenticate. Use common or organization if the app is multitenant. If not specified, use the tenant specified in the 'CLIMICROSOFT365_TENANT' environment variable. If the environment variable is not defined, use 'common' as the tenant identifier"

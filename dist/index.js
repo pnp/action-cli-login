@@ -8,30 +8,33 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getInstallCommand = exports.getLoginCommand = void 0;
+const core = __nccwpck_require__(186);
 const constants_1 = __nccwpck_require__(105);
 const utils_1 = __nccwpck_require__(918);
 function getLoginCommand(options) {
     let authCommand;
     if (options.ADMIN_USERNAME || options.ADMIN_PASSWORD) {
         if ((0, utils_1.isNullOrEmpty)(options.ADMIN_USERNAME)) {
-            throw new Error('ADMIN_USERNAME is required');
+            throw new Error('ADMIN_USERNAME is required.');
         }
         ;
         if ((0, utils_1.isNullOrEmpty)(options.ADMIN_PASSWORD)) {
-            throw new Error('ADMIN_PASSWORD is required');
+            throw new Error('ADMIN_PASSWORD is required.');
         }
         ;
+        core.info('ℹ️ Logging in using user credentials...');
         authCommand = `login --authType password --userName ${options.ADMIN_USERNAME} --password ${options.ADMIN_PASSWORD}`;
     }
-    else {
-        if ((0, utils_1.isNullOrEmpty)(options.CERTIFICATE_ENCODED)) {
-            throw new Error('CERTIFICATE_ENCODED is required if ADMIN_USERNAME and ADMIN_PASSWORD are not provided');
-        }
-        ;
+    else if (options.CERTIFICATE_ENCODED) {
+        core.info('ℹ️ Logging in using certificate credentials...');
         authCommand = `login --authType certificate --certificateBase64Encoded ${options.CERTIFICATE_ENCODED}`;
         if (options.CERTIFICATE_PASSWORD) {
             authCommand += ` --password ${options.CERTIFICATE_PASSWORD}`;
         }
+    }
+    else {
+        core.info('ℹ️ Logging in using federated identity...');
+        authCommand = `login --authType federatedIdentity`;
     }
     if (options.APP_ID) {
         authCommand += ` --appId ${options.APP_ID}`;
@@ -45,6 +48,14 @@ exports.getLoginCommand = getLoginCommand;
 function getInstallCommand(options) {
     let installCommand;
     if (options.CLI_VERSION) {
+        if (!options.ADMIN_USERNAME && !options.ADMIN_PASSWORD && !options.CERTIFICATE_ENCODED && options.CLI_VERSION !== 'latest' && options.CLI_VERSION !== 'next') {
+            const splitVersion = options.CLI_VERSION.split('.');
+            const majorVersionNr = parseInt(splitVersion[0]);
+            const minorVersionNr = parseInt(splitVersion[1]);
+            if (majorVersionNr < 10 || (majorVersionNr === 10 && minorVersionNr < 5)) {
+                throw new Error('Federated identity login is only supported in version 10.5.0 and above of the CLI for Microsoft 365.');
+            }
+        }
         installCommand = `${constants_1.constants.CLI_NPMINSTALL_COMMAND}@${options.CLI_VERSION}`;
     }
     else {
@@ -181,17 +192,17 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.validate = void 0;
 const utils_1 = __nccwpck_require__(918);
 function validate(options) {
-    if ((0, utils_1.isNullOrEmpty)(options.ADMIN_USERNAME) && (0, utils_1.isNullOrEmpty)(options.ADMIN_PASSWORD)
-        && (0, utils_1.isNullOrEmpty)(options.CERTIFICATE_ENCODED)) {
-        throw new Error('You must provide either ADMIN_USERNAME and ADMIN_PASSWORD parameters (if authenticating with user name / password), or at least CERTIFICATE_ENCODED (if authenticating with a certificate). More information here: https://pnp.github.io/cli-microsoft365/cmd/login/');
+    if ((0, utils_1.isNullOrEmpty)(options.APP_ID) && (0, utils_1.isNullOrEmpty)(process.env.CLIMICROSOFT365_ENTRAAPPID)) {
+        throw new Error('APP_ID is required or the environment variable CLIMICROSOFT365_ENTRAAPPID must be set with the app ID of the Entra application used for authentication.');
     }
-    else {
-        if ((0, utils_1.isNullOrEmpty)(options.ADMIN_USERNAME) && !(0, utils_1.isNullOrEmpty)(options.ADMIN_PASSWORD)) {
-            throw new Error('ADMIN_USERNAME is required if ADMIN_PASSWORD is passed');
-        }
-        if (!(0, utils_1.isNullOrEmpty)(options.ADMIN_USERNAME) && (0, utils_1.isNullOrEmpty)(options.ADMIN_PASSWORD)) {
-            throw new Error('ADMIN_PASSWORD is required if ADMIN_USERNAME is passed');
-        }
+    if ((0, utils_1.isNullOrEmpty)(options.TENANT) && (0, utils_1.isNullOrEmpty)(process.env.CLIMICROSOFT365_TENANT)) {
+        throw new Error('TENANT is required or the environment variable CLIMICROSOFT365_TENANT must be set with the ID of the tenant you want to authenticate to.');
+    }
+    if ((0, utils_1.isNullOrEmpty)(options.ADMIN_USERNAME) && !(0, utils_1.isNullOrEmpty)(options.ADMIN_PASSWORD)) {
+        throw new Error('ADMIN_USERNAME is required if ADMIN_PASSWORD is passed.');
+    }
+    if (!(0, utils_1.isNullOrEmpty)(options.ADMIN_USERNAME) && (0, utils_1.isNullOrEmpty)(options.ADMIN_PASSWORD)) {
+        throw new Error('ADMIN_PASSWORD is required if ADMIN_USERNAME is passed.');
     }
 }
 exports.validate = validate;
