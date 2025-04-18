@@ -7,8 +7,8 @@ export function getLoginCommand(options: Options): string {
     let authCommand: string;
 
     if (options.ADMIN_USERNAME || options.ADMIN_PASSWORD) {
-        if (isNullOrEmpty(options.ADMIN_USERNAME)) { throw new Error('ADMIN_USERNAME is required'); };
-        if (isNullOrEmpty(options.ADMIN_PASSWORD)) { throw new Error('ADMIN_PASSWORD is required'); };
+        if (isNullOrEmpty(options.ADMIN_USERNAME)) { throw new Error('ADMIN_USERNAME is required.'); };
+        if (isNullOrEmpty(options.ADMIN_PASSWORD)) { throw new Error('ADMIN_PASSWORD is required.'); };
         
         core.info('ℹ️ Logging in using user credentials...');
         
@@ -50,7 +50,7 @@ export function getInstallCommand(options: Options): string {
             const minorVersionNr = parseInt(splitVersion[1]);
 
             if (majorVersionNr < 10 || (majorVersionNr === 10 && minorVersionNr < 5)) {
-                throw new Error('Federated identity login is only supported in version 10.5.0 and above of the CLI for Microsoft 365');
+                throw new Error('Federated identity login is only supported in version 10.5.0 and above of the CLI for Microsoft 365.');
             }
         }
         installCommand = `${constants.CLI_NPMINSTALL_COMMAND}@${options.CLI_VERSION}`;
