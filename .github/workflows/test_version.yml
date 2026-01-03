@@ -13,4 +13,4 @@ jobs:
         with:
           ADMIN_USERNAME: ${{secrets.ADMIN_USERNAME}}
           ADMIN_PASSWORD: ${{secrets.ADMIN_PASSWORD}}
-          CLI_VERSION: 5.7.0-beta.9e8cf99
+          CLI_VERSION: 11.3.1

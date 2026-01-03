@@ -7,9 +7,10 @@ GitHub action to log in to a tenant using the CLI for Microsoft 365.
 This GitHub Action (created using typescript) uses [CLI for Microsoft 365](https://pnp.github.io/cli-microsoft365/), specifically the [login command](https://pnp.github.io/cli-microsoft365/cmd/login), to allow you to log in to Microsoft 365.
 
 ## Usage
+
 ### Pre-requisites
 
-Create a workflow `.yml` file in your `.github/workflows` directory. An [example workflow](#example-workflow---cli-for-microsoft-365-login) is available below. For more information, reference the GitHub Help Documentation for [Creating a workflow file](https://help.github.com/en/articles/configuring-a-workflow#creating-a-workflow-file).
+Create a workflow `.yml` file in your `.github/workflows` directory. An [example workflow](#example-workflow---cli-for-microsoft-365-login-federated-identity-authentication) is available below. For more information, reference the GitHub Help Documentation for [Creating a workflow file](https://help.github.com/en/articles/configuring-a-workflow#creating-a-workflow-file).
 
 ### Inputs
 
@@ -66,17 +67,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [22.x]
+        node-version: [24]
 
     steps:
-
     ##
     ## Code to get the package omitted
     ##
 
     # CLI for Microsoft 365 login action
     - name: Login to tenant
-      uses: pnp/action-cli-login@v3
+      uses: pnp/action-cli-login@v4
       with:
         TENANT: ${{ secrets.TENANT }}
         APP_ID: ${{ secrets.APP_ID }}
@@ -106,17 +106,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [22.x]
+        node-version: [24]
 
     steps:
-
     ##
     ## Code to get the package omitted
     ##
 
     # CLI for Microsoft 365 login action
     - name: Login to tenant
-      uses: pnp/action-cli-login@v3
+      uses: pnp/action-cli-login@v4
       with:
         TENANT: ${{ secrets.TENANT }}
         APP_ID: ${{ secrets.APP_ID }}
@@ -148,17 +147,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [22.x]
+        node-version: [24]
 
     steps:
-
     ##
     ## Code to get the package omitted
     ##
 
     # CLI for Microsoft 365 login action
     - name: Login to tenant
-      uses: pnp/action-cli-login@v3
+      uses: pnp/action-cli-login@v4
       with:
         TENANT: ${{ secrets.TENANT }}
         APP_ID: ${{ secrets.APP_ID }}
@@ -190,17 +188,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [22.x]
+        node-version: [24]
 
     steps:
-
     ##
     ## Code to get the package omitted
     ##
 
     # CLI for Microsoft 365 login action
     - name: Login to tenant
-      uses: pnp/action-cli-login@v3
+      uses: pnp/action-cli-login@v4
       with:
         TENANT: ${{ secrets.TENANT }}
         APP_ID: ${{ secrets.APP_ID }}
