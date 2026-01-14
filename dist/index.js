@@ -135,7 +135,7 @@ function run() {
             yield (0, exec_1.exec)(`${installCommand}`, [], { silent: (options.CLI_VERSION ? false : true) });
             const cliPath = yield (0, io_1.which)(constants_1.constants.CLI_PREFIX, true);
             core.info(`✅ CLI for Microsoft 365 successfully installed at ${cliPath}`);
-            yield (0, exec_1.exec)(`${constants_1.constants.CLI_PREFIX} setup --scripting --output none`);
+            yield (0, exec_1.exec)(`${constants_1.constants.CLI_PREFIX} setup --scripting --skipApp --output none`);
             core.info('ℹ️ Attempting to log in...');
             const loginCommand = (0, commands_1.getLoginCommand)(options);
             yield (0, exec_1.exec)(`${constants_1.constants.CLI_PREFIX} ${loginCommand}`, [], {});
