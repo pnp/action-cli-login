@@ -6,7 +6,7 @@ jobs:
     name: CLI Login Job
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: CLI for Microsoft 365 Login
         uses: ./
         id: login
