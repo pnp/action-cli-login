@@ -128,11 +128,11 @@
     "c8": "^11.0.0",
     "concurrently": "^9.2.1",
     "esbuild": "^0.28.0",
-    "eslint": "^10.2.1",
+    "eslint": "^10.3.0",
     "mocha": "^11.7.5",
     "rimraf": "^6.0.1",
     "source-map-support": "^0.5.21",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.0"
+    "typescript-eslint": "^8.59.1"
   }
 }
